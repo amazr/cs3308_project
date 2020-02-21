@@ -9,4 +9,5 @@ Getting up and running:
 Asides:
     -The express server can found in server.js, it has a lot of comments explaining what everything does.
     -EJS is just a templating engine, I think it might be a pretty simple thing to use, so look it up, but this can be easily swapped for something else right now!
-    -Shoot me a text if you have any questions!
+    -nodemon is running, so if the server is running and you make any changes to server.js it will automatically restart.
+    -Text me if you have questions.
