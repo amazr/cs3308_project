@@ -2,6 +2,9 @@
 var express = require('express');
 var app = express();
 
+/* Sets the root for serving static files */
+app.use(express.static('resources'))
+
 /* Sets the view engine to ejs, this is just an html templating thing. */
 app.set('view engine', 'ejs');
 
