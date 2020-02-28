@@ -7,12 +7,12 @@ Also, 'killall node' might help if you cannot connect to localhost but the serve
 2/28. I added a .gitignore. If you look inside it there is an ignore for .env files. This is where the process.env.VARIABLE's are coming from. Shoot me a text and I can tell you how to set those up.
 2/29. test
 
-Getting up and running:
+## Getting up and running:
 1. Clone this repo
 2. In your terminal type 'npm install'
 3. To run the server type 'npm start'
 
-Asides:
+## Asides:
 * The express server can found in server.js, it has a lot of comments explaining what everything does.
 * EJS is just a templating engine, I think it might be a pretty simple thing to use, so look it up, but this can be easily swapped for something else right now!
 * nodemon is running, so if the server is running and you make any changes to server.js it will automatically restart.
