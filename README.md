@@ -1,5 +1,8 @@
 Project Jupiter
 
+Please run 'npm install' everytime you pull just incase extra dependencies were installed since the last time you pulled.
+Also, 'killall node' might help if you cannot connect to localhost but the server is running
+
 Getting up and running:
 1. Clone this repo
 2. In your terminal type 'npm install'
