@@ -3,6 +3,10 @@ Project Jupiter
 Please run 'npm install' everytime you pull just incase extra dependencies were installed since the last time you pulled.
 Also, 'killall node' might help if you cannot connect to localhost but the server is running
 
+## Change-Log
+2/28. I added a .gitignore. If you look inside it there is an ignore for .env files. This is where the process.env.VARIABLE's are coming from. Shoot me a text and I can tell you how to set those up.
+2/29. test
+
 Getting up and running:
 1. Clone this repo
 2. In your terminal type 'npm install'
