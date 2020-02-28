@@ -1,7 +1,6 @@
-Project Jupiter
+# Project Jupiter
 
-Please run 'npm install' everytime you pull just incase extra dependencies were installed since the last time you pulled.
-Also, 'killall node' might help if you cannot connect to localhost but the server is running
+A website project for cs 3308!
 
 ## Change-Log
 2/28. I added a .gitignore. If you look inside it there is an ignore for .env files. This is where the process.env.VARIABLE's are coming from. Shoot me a text and I can tell you how to set those up.
@@ -18,3 +17,5 @@ Also, 'killall node' might help if you cannot connect to localhost but the serve
 * nodemon is running, so if the server is running and you make any changes to server.js it will automatically restart.
 * Stop the server with 'ctrl + C' if in linux
 * Text me if you have questions.
+* Please run 'npm install' everytime you pull just incase extra dependencies were installed since the last time you pulled.
+* 'killall node' might help if you cannot connect to localhost but the server is running
