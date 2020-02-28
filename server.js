@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const routes = require('./routes');
 const session = require('express-session');
-const MongoStore = require('connect-mongodb-session')(session);
 const bodyParser= require('body-parser');
 
 /* Declare express app */
@@ -13,6 +12,11 @@ const app = express();
 
 /* App use section */
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(session({
+    'secret': process.env.SECRET,
+    saveUninitialized: true,
+    resave: false
+}));
 app.use(express.static('resources'))
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.use(routes);
