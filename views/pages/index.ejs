@@ -2,12 +2,16 @@
 <html lang='en'>
     <head>
         <title>Jupiter</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        <link rel="stylesheet" href="../resources/css/master.css">
+        <%- include('../partials/bootstrap') %>
     </head>
     <body>
-        <h1>Hello Jupiter!</h1>
-        <img src="/img/jupiter_logo.png" alt="">
+        <div>
+            <h1>Hello Jupiter!</h1>
+            <img src="/img/jupiter_logo.png" style="height:200px; width:200px;"alt="">
+        </div>
+        <div class="container">
+            <%- include('../partials/registerForm') %>
+        </div>
         <script src="../resources/js/script.js"></script>
     </body>
 </html>
