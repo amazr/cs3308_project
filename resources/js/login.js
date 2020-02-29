@@ -1,3 +1,3 @@
-function login() {
-    console.log("login attempted");
+function form_submit(form) {
+    document.getElementById(form).submit();
 }

@@ -19,6 +19,7 @@ app.use(session({
 }));
 app.use(express.static('resources'))
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
+app.use(express.static(__dirname + '/node_modules/jquery/dist'));
 app.use(routes);
 
 /* Connect to mongoDB, throw errors to console */

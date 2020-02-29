@@ -13,14 +13,13 @@
       </ul>
       <div class="form-inline my-2 my-lg-0">
         <% if (isLoggedIn === true) { %>
+            <a class="nav-link" href="/"><%= username %></a>
             <form action="/logout" method="POST">
                 <button type="submit" class="btn btn-outline-light my-2 my-sm-0">Logout</button>
             </form>
         <% } else { %>
             <button type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-outline-light my-2 my-sm-0">Login</button>
-            <div id="login-modal" class="modal fade form" role="dialog">
-                <%- include('../partials/login-modal') %>
-            </div>
+            <%- include('../partials/login-modal') %>
         <% } %>
       </div>
     </div>
