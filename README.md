@@ -11,8 +11,9 @@ Date         | What's new
 
 ## Getting up and running:
 1. Clone this repo
-2. In your terminal type 'npm install'
-3. To run the server type 'npm start'
+2. Get the '.env' file from me. This includes all our API keys. Nothing works without it.
+3. In your terminal type 'npm install'
+4. To run the server type 'npm start'
 
 ## Asides:
 * The express server can found in server.js, it has a lot of comments explaining what everything does.
