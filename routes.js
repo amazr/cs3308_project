@@ -1,9 +1,20 @@
 const express = require('express');
 const bcrypt = require("bcrypt");
+const request = require('request');
+
 const app = express();
 
 /* Model requirements */
 const userModel = require('./models/user');
+
+/* Below is the response object that must be passed in every route
+let response = {
+        isLoggedIn: false,
+        username: "",
+        page: "",
+        messages: []
+};
+*/
 
 
 /* APP GET ROUTES*/
@@ -12,7 +23,9 @@ const userModel = require('./models/user');
 app.get('/', (req,res) => {
     let response = {
         isLoggedIn: false,
-        username: ""
+        username: "",
+        page: "",
+        messages: []
     };
 
     if (req.session.user) {
@@ -22,12 +35,32 @@ app.get('/', (req,res) => {
     res.render('pages/index', response);
 });
 
+app.get('/register', (req,res) => {
+    let response = {
+        isLoggedIn: false,
+        username: "",
+        page: "",
+        messages: []
+    };
+
+    if (req.session.user) {
+        response.isLoggedIn = req.session.user.isLoggedIn;
+        response.username = req.session.user.name;
+    }
+    else {
+        response.page = "register"
+    }
+    res.render('pages/index', response);
+});
+
 /* APP POST ROUTES */ 
 /* User Login route */
 app.post('/login', (req,res) => {
     let response = {
         isLoggedIn: false,
-        username: ""
+        username: "",
+        page: "",
+        messages: []
     };
 
     userModel.findOne({
@@ -58,8 +91,14 @@ app.post('/register', (req,res) => {
 
     let response = {
         isLoggedIn: false,
-        username: ""
+        username: "",
+        page: "",
+        messages: []
     };
+    if (req.body.password != req.body.r_password) {
+        response.messages.push("passwordmatch");
+        response.page = "register";
+    }
 
     //Find a user in the DB with the username passed in from the html form
     userModel.findOne({
@@ -67,17 +106,28 @@ app.post('/register', (req,res) => {
     },
     (err,person) => {
         if (err) console.log(err);                                                  //If there was a connection error
-        else if (person) console.log("Username already exists");                    //If the username already exists
-        else {
+        else if (person) {//If the username already exists
+            response.messages.push("invuser");
+            response.page = "register";
+        }                               
+        else if (req.body.password === req.body.r_password) {
             bcrypt.hash(req.body.password, 10, (err, hash) => {                     //Encrypt the password using bcrypt
                 user.password = hash;                                               //Update the model password with the encrypted one
                 user.save((err) => {                                                //Save the new user to the DB
                     if (err) res.send(err);
-                    else console.log(req.body.username + " Successfully Registered");
+                    else {
+                        req.session.user = {
+                            name: req.body.username,
+                            isLoggedIn: true
+                        };
+                        res.redirect('/'); 
+                    }
                 });
             });
         }
-        res.redirect('/');   //This will need to redirect to a register page
+        else {
+            res.render('pages/index', response); 
+        }
     });
 });
 
@@ -87,6 +137,19 @@ app.post('/logout', (req,res) => {
         delete req.session.user;
     }
     res.redirect('/');
+});
+
+app.post('/getWeather', (req,res) => {
+    let city = "London";
+    let url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${process.env.OPENWEATHER}`
+    request(url, (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+            console.log(body);          // Print the openweather response.
+          }
+          else {
+              console.log(error);
+          }
+    });
 });
 
 module.exports = app

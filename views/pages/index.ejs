@@ -3,13 +3,18 @@
     <head>
         <title>Jupiter</title>
         <%- include('../partials/bootstrap') %>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="/js/login.js"></script>
+        <script src="/js/register.js"></script>
     </head>
     <body>
         <%- include('../partials/nav') %>
         <div class="container">
-            <%- include('../partials/registerForm') %>
+            <% if (page === "register") { %>
+                <%- include('../partials/registerForm') %>
+            <% } else { %>
+                <%- include('../partials/temp') %>
+            <% } %>
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-        <script src="/js/login.js"></script>
     </body>
 </html>

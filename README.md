@@ -3,8 +3,9 @@
 A website project for cs 3308!
 
 ## Change-Log
-2/28. I added a .gitignore. If you look inside it there is an ignore for .env files. This is where the process.env.VARIABLE's are coming from. Shoot me a text and I can tell you how to set those up.
-2/29. test
+(2/28) I added a .gitignore. If you look inside it there is an ignore for .env files. This is where the process.env.VARIABLE's are coming from. Shoot me a text and I can tell you how to set    those up.
+(3/4) Added an openweather field in the env file. Created a seperate page for user registration and some form validation. User is now logged in once they register for an account. Made a mock 
+post route for getting weather data from openweather, currently it only gets data for the city of London.
 
 ## Getting up and running:
 1. Clone this repo
