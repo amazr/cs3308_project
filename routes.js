@@ -19,7 +19,12 @@ let response = {
 
 /* APP GET ROUTES*/
 
-//Index route
+/**
+ * get route for '/'
+ * 
+ * @param {JSON} req.session - Handeled automatically by express-sessions
+ * @returns {JSON} A JSON object that is fed to index.ejs
+ */
 app.get('/', (req,res) => {
     let response = {
         isLoggedIn: false,
@@ -35,6 +40,11 @@ app.get('/', (req,res) => {
     res.render('pages/index', response);
 });
 
+/**
+ * A get route for '/register', renders the register form
+ * @param {JSON} req.session - Handeled by express-sessions
+ * @returns {JSON} A JSON object that is fed to index.ejs
+ */
 app.get('/register', (req,res) => {
     let response = {
         isLoggedIn: false,
@@ -54,7 +64,13 @@ app.get('/register', (req,res) => {
 });
 
 /* APP POST ROUTES */ 
-/* User Login route */
+
+/**
+ * A post route for '/login'. When called a user is either logged in or they aren't
+ * @param {String} req.body.username - Form must have field with name="username"
+ * @param {String} req.body.password - Form must have field with name="password"
+ * @returns {(JSON | JSON)} First it sets the req.session, then it renders index.ejs with response
+ */
 app.post('/login', (req,res) => {
     let response = {
         isLoggedIn: false,
@@ -85,6 +101,14 @@ app.post('/login', (req,res) => {
 });
 
 //User registration route
+/**
+ * A post route for '/register'. Allows a user to create an account. Will log user if account creation is successful.
+ * The form must include the following fields, named as such
+ * @param {String} req.body.username
+ * @param {String} req.body.password
+ * @param {String} req.body.r_password
+ * @returns {(JSON | JSON)} On failure this route will reload get'/register'. On success it will pass response to index.ejs and log the user in.
+ */
 app.post('/register', (req,res) => {
     //For more info on this read about mongoose models and schemas and see the /models dir
     let user = new userModel(req.body);
@@ -95,43 +119,55 @@ app.post('/register', (req,res) => {
         page: "",
         messages: []
     };
-    if (req.body.password != req.body.r_password) {
-        response.messages.push("passwordmatch");
-        response.page = "register";
-    }
 
-    //Find a user in the DB with the username passed in from the html form
-    userModel.findOne({
-        username: req.body.username,
-    },
-    (err,person) => {
-        if (err) console.log(err);                                                  //If there was a connection error
-        else if (person) {//If the username already exists
-            response.messages.push("invuser");
-            response.page = "register";
-        }                               
-        else if (req.body.password === req.body.r_password) {
-            bcrypt.hash(req.body.password, 10, (err, hash) => {                     //Encrypt the password using bcrypt
-                user.password = hash;                                               //Update the model password with the encrypted one
-                user.save((err) => {                                                //Save the new user to the DB
-                    if (err) res.send(err);
-                    else {
-                        req.session.user = {
-                            name: req.body.username,
-                            isLoggedIn: true
-                        };
-                        res.redirect('/'); 
-                    }
+    if (!req.body.username) {                               //No username input
+        response.messages.push("usernameempty");
+        response.page = "register";
+        res.render('pages/index', response);
+    }
+    else {
+        userModel.findOne({
+            username: req.body.username,
+        },
+        (err,person) => {
+            if (err) console.log(err);                                                  //If there was a connection error
+            else if (person) {//If the username already exists
+                response.messages.push("invuser");
+                response.page = "register";
+            }                   
+            if (req.body.password != req.body.r_password) {    //Passwords do not match
+                response.messages.push("passwordmatch");
+                response.page = "register";
+            }
+            else if (!req.body.password || !req.body.r_password) {  //No password input
+                response.messages.push("passwordempty");
+                response.page = "register";
+            }            
+            else {
+                bcrypt.hash(req.body.password, 10, (err, hash) => {                     //Encrypt the password using bcrypt
+                    user.password = hash;                                               //Update the model password with the encrypted one
+                    user.save((err) => {                                                //Save the new user to the DB
+                        if (err) throw "Error connecting to mongoose in register"
+                        else {
+                            req.session.user = {
+                                name: req.body.username,
+                                isLoggedIn: true
+                            }; 
+                        }
+                    });
                 });
-            });
-        }
-        else {
+            }
             res.render('pages/index', response); 
-        }
-    });
+        });
+    }
 });
 
 //User logout route
+/**
+ * A post route for '/logout'. Upon success the user is logged out and their session is cleared.
+ * @param {JSON} req.session.user - If there is no session nothing happens.
+ * @returns This route redirects to '/' but does not pass it anything directly (everything is handeled by express-sessions).
+ */
 app.post('/logout', (req,res) => {
     if(req.session.user) {
         delete req.session.user;
@@ -139,17 +175,36 @@ app.post('/logout', (req,res) => {
     res.redirect('/');
 });
 
-app.post('/getWeather', (req,res) => {
+
+/* THESE ARE EXAMPLE POSTS FOR TESTING API HOOKUPS! THEY WORK! :) */
+app.post('/testWeather', (req,res) => {
     let city = "London";
     let url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${process.env.OPENWEATHER}`
     request(url, (error, response, body) => {
-        if (!error && response.statusCode == 200) {
-            console.log(body);          // Print the openweather response.
-          }
-          else {
-              console.log(error);
-          }
+        if (!error && response.statusCode == 200) { //On Success
+            console.log(body);
+        }
+        else {                                      //On Failure
+            console.log(error);
+        }
     });
+    res.redirect('/');
+});
+
+app.post('/testGoogle', (req,res) => {
+    let origin = "Boulder";
+    let destination = "Denver";
+    let url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${destination}&key=${process.env.GOOGLE}`;
+
+    request(url, (error, response, body) => {
+        if (!error && response.statusCode == 200) { //On success
+            console.log(body);
+        }
+        else {                                      //On Failure
+            console.log(error);
+        }
+    });
+    res.redirect('/');
 });
 
 module.exports = app
