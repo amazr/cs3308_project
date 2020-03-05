@@ -6,6 +6,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src="/js/login.js"></script>
         <script src="/js/register.js"></script>
+        <script src="/js/addCard.js"></script>
     </head>
     <body>
         <%- include('../partials/nav') %>
@@ -13,7 +14,22 @@
             <% if (page === "register") { %>
                 <%- include('../partials/registerForm') %>
             <% } else { %>
-                <%- include('../partials/temp') %>
+                <div class="container mt-4">
+                    <%- include('../partials/add-card') %>
+                    <% if (messages.includes("none")) { %>
+                        <p>No Results Found :(</p>
+                    <% } else { %>
+                        <% messages.forEach(element => { %>
+                            <form action="/addCard" method="GET" class="text-center mt-4">
+                                <div class="form-group mb-0">
+                                    <label class="mr-3" for="location"><%=element%></label>
+                                    <button class="btn btn-success ml-3" type="submit"> + </button>
+                                </div>
+                            </form>
+                        <% }) %>
+                    <% } %>
+                    <%- include('../partials/temp') %>
+                </div>
             <% } %>
         </div>
     </body>
