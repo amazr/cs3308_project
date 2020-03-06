@@ -7,6 +7,9 @@ const app = express();
 /* Model requirements */
 const userModel = require('./models/user');
 
+/* Global variable for logged out user or unsaved cards list*/
+let unsavedCards = [];
+
 /* Helper Functions */
 /**
  * This function was created to keep a standardized response when rendering pages at the end of a route.
@@ -18,8 +21,26 @@ function createNewResponse() {
         isLoggedIn: false,
         username: "",
         page: "",
-        messages: []
+        messages: [],
+        cards: unsavedCards
     };
+}
+
+function addCardToResponse(response, newTitle, newCurrentTemp, newConditions) {
+    unsavedCards.push({
+        title: newTitle,
+        currentTemp: newCurrentTemp,
+        conditions: newConditions
+    });
+    return response;
+}
+
+function KtoF(tempK) {
+    return Math.ceil(((tempK-273.15)*1.8)+32);
+}
+
+function KtoC(tempK) {
+    return K-273.15;
 }
 
 
@@ -168,21 +189,15 @@ app.post('/logout', (req,res) => {
 
 app.post('/getPlace', (req,res) => {
     let response = createNewResponse();
-    let url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${req.body.newPlace}&inputtype=textquery&fields=formatted_address,name&key=${process.env.GOOGLE}`;
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${req.body.newPlace}&appid=${process.env.OPENWEATHER}`
     request(url, (error, resp, body) => {
         if (!error && resp.statusCode == 200) { //On success
             let bodyJSON = JSON.parse(body);
-            if (bodyJSON.status != "OK") {
-                response.messages.push("none");
-            }
-            else {
-                bodyJSON.candidates.forEach( element => {
-                    response.messages.push(element.formatted_address);
-                });
-            }
-            res.render('pages/index', response);
+            response = addCardToResponse(response,bodyJSON.name, KtoF(bodyJSON.main.temp) ,bodyJSON.weather[0].main)
+            console.log(response);
+            res.render('pages/index', response); 
         }
-        else {
+        else {      //IF A PLACE WAS INVALID
             console.log("Error with getPlace" + error);
         }
     });
@@ -195,7 +210,7 @@ app.post('/testWeather', (req,res) => {
     let url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${process.env.OPENWEATHER}`
     request(url, (error, response, body) => {
         if (!error && response.statusCode == 200) { //On Success
-            console.log(body);
+            console.log(JSON.parse(body));
         }
         else {                                      //On Failure
             console.log(error);
