@@ -7,14 +7,20 @@ const app = express();
 /* Model requirements */
 const userModel = require('./models/user');
 
-/* Below is the response object that must be passed in every route
-let response = {
+/* Helper Functions */
+/**
+ * This function was created to keep a standardized response when rendering pages at the end of a route. 
+ * @returns A response JSON object
+ */
+
+function createNewResponse() {
+    return {
         isLoggedIn: false,
         username: "",
         page: "",
         messages: []
-};
-*/
+    };
+}
 
 
 /* APP GET ROUTES*/
@@ -26,12 +32,7 @@ let response = {
  * @returns {JSON} A JSON object that is fed to index.ejs
  */
 app.get('/', (req,res) => {
-    let response = {
-        isLoggedIn: false,
-        username: "",
-        page: "",
-        messages: []
-    };
+    let response = createNewResponse();
 
     if (req.session.user) {
         response.isLoggedIn = req.session.user.isLoggedIn;
@@ -46,12 +47,7 @@ app.get('/', (req,res) => {
  * @returns {JSON} A JSON object that is fed to index.ejs
  */
 app.get('/register', (req,res) => {
-    let response = {
-        isLoggedIn: false,
-        username: "",
-        page: "",
-        messages: []
-    };
+    let response = createNewResponse();
 
     if (req.session.user) {
         response.isLoggedIn = req.session.user.isLoggedIn;
@@ -72,12 +68,7 @@ app.get('/register', (req,res) => {
  * @returns {(JSON | JSON)} First it sets the req.session, then it renders index.ejs with response
  */
 app.post('/login', (req,res) => {
-    let response = {
-        isLoggedIn: false,
-        username: "",
-        page: "",
-        messages: []
-    };
+    let response = createNewResponse();
 
     userModel.findOne({
         username: req.body.username,
@@ -113,12 +104,7 @@ app.post('/register', (req,res) => {
     //For more info on this read about mongoose models and schemas and see the /models dir
     let user = new userModel(req.body);
 
-    let response = {
-        isLoggedIn: false,
-        username: "",
-        page: "",
-        messages: []
-    };
+    let response = createNewResponse();
 
     if (!req.body.username) {                               //No username input
         response.messages.push("usernameempty");
@@ -175,6 +161,28 @@ app.post('/logout', (req,res) => {
     res.redirect('/');
 });
 
+app.post('/getPlace', (req,res) => {
+    let response = createNewResponse();
+    let url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${req.body.newPlace}&inputtype=textquery&fields=formatted_address,name&key=${process.env.GOOGLE}`;
+    request(url, (error, resp, body) => {
+        if (!error && resp.statusCode == 200) { //On success
+            let bodyJSON = JSON.parse(body);
+            if (bodyJSON.status != "OK") {
+                response.messages.push("none");
+            }
+            else {
+                bodyJSON.candidates.forEach( element => {
+                    response.messages.push(element.formatted_address);
+                });
+            }
+            res.render('pages/index', response); 
+        }
+        else {
+            console.log("Error with getPlace" + error);
+        }
+    });
+});
+
 
 /* THESE ARE EXAMPLE POSTS FOR TESTING API HOOKUPS! THEY WORK! :) */
 app.post('/testWeather', (req,res) => {
@@ -202,6 +210,20 @@ app.post('/testGoogle', (req,res) => {
         }
         else {                                      //On Failure
             console.log(error);
+        }
+    });
+    res.redirect('/');
+});
+
+app.post('/testPlaces', (req,res) => {
+    let response = createNewResponse();
+    let test = "a";
+    let url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${test}&inputtype=textquery&fields=formatted_address,name&key=${process.env.GOOGLE}`;
+    request(url, (error, response, body) => {
+        if (!error && response.statusCode == 200) { //On success
+            //JSON.parse(body).candidates[i].name
+            console.log(body);
+
         }
     });
     res.redirect('/');
