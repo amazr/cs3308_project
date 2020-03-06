@@ -9,6 +9,7 @@ Date         | What's new
 (3/4) | Added an openweather field in the env file. Created a seperate page for user registration and some form validation. User is now logged in once they register for an account. Made a mock post route for getting weather data from openweather, currently it only gets data for the city of London.
 (3/4) ext. | Added Google Maps Direction API test route (it works!), and added two buttons on the main page to test the routes.Also did some refactoring of the register route for a crash, and some logic for which warnings are more important (for example: password match vs password empty, which to show?). Also added some documenation using JSdoc styling.
 (3/5) | Added a search bar that is hooked up to Google Places API. It populates a list of locations and displays them under the search bar. Each location has a green button that will allow you to add that card to your list (I think logged out users should only have access to one dynamic list). This is a first pass, might pivot off Google Places here, who knows, agile and all.
+3/6 | Added basic structure and server response for cards. Only provides current weather and such.
 
 ## Getting up and running:
 1. Clone this repo

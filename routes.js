@@ -26,13 +26,12 @@ function createNewResponse() {
     };
 }
 
-function addCardToResponse(response, newTitle, newCurrentTemp, newConditions) {
+function addCardToResponse(newTitle, newCurrentTemp, newConditions) {
     unsavedCards.push({
         title: newTitle,
         currentTemp: newCurrentTemp,
         conditions: newConditions
     });
-    return response;
 }
 
 function KtoF(tempK) {
@@ -59,6 +58,7 @@ app.get('/', (req,res) => {
         response.isLoggedIn = req.session.user.isLoggedIn;
         response.username = req.session.user.name;
     }
+    console.log(response);
     res.render('pages/index', response);
 });
 
@@ -193,12 +193,12 @@ app.post('/getPlace', (req,res) => {
     request(url, (error, resp, body) => {
         if (!error && resp.statusCode == 200) { //On success
             let bodyJSON = JSON.parse(body);
-            response = addCardToResponse(response,bodyJSON.name, KtoF(bodyJSON.main.temp) ,bodyJSON.weather[0].main)
-            console.log(response);
-            res.render('pages/index', response); 
+            addCardToResponse(bodyJSON.name, KtoF(bodyJSON.main.temp) ,bodyJSON.weather[0].main)
+            res.redirect('/');
         }
         else {      //IF A PLACE WAS INVALID
-            console.log("Error with getPlace" + error);
+            response.messages.push("invplace");
+            res.render('pages/index', response);
         }
     });
 });

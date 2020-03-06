@@ -16,22 +16,24 @@
             <% } else { %>
                 <div class="container mt-4">
                     <%- include('../partials/add-card') %>
-                    <% if (messages.includes("none")) { %>
+                    <% if (messages.includes("invplace")) { %>
                         <p>No Results Found :(</p>
-                    <% } else { %>
-                        <% messages.forEach(element => { %>
-                            <form action="/addCard" method="GET" class="text-center mt-4">
-                                <div class="form-group mb-0">
-                                    <label class="mr-3" for="location"><%=element%></label>
-                                    <button class="btn btn-success ml-3" type="submit"> + </button>
-                                </div>
-                            </form>
-                        <% }) %>
                     <% } %>
-                    <%- include('../partials/temp') %>
                 </div>
             <% } %>
         </div>
-        <div class="card-deck" id="weather_deck"></div>
+        <div class="card-deck" id="weather_deck">
+            <% for (var i = 0; i < cards.length; i++) { %>
+                <div class="card">
+                    <div class="card-header">
+                        <h1><%= cards[i].title %></h1>
+                    </div>
+                    <div class="card-body">
+                        <p><%= cards[i].currentTemp %> F</p>
+                        <p><%= cards[i].conditions %></p>
+                    </div>
+                </div>
+            <% } %>
+        </div>
     </body>
 </html>
