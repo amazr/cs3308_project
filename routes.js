@@ -9,7 +9,7 @@ const userModel = require('./models/user');
 
 /* Helper Functions */
 /**
- * This function was created to keep a standardized response when rendering pages at the end of a route. 
+ * This function was created to keep a standardized response when rendering pages at the end of a route.
  * @returns A response JSON object
  */
 
@@ -27,7 +27,7 @@ function createNewResponse() {
 
 /**
  * get route for '/'
- * 
+ *
  * @param {JSON} req.session - Handeled automatically by express-sessions
  * @returns {JSON} A JSON object that is fed to index.ejs
  */
@@ -59,7 +59,12 @@ app.get('/register', (req,res) => {
     res.render('pages/index', response);
 });
 
-/* APP POST ROUTES */ 
+/**
+ * A get route for '/addCard', update user list and reload page
+ */
+
+
+/* APP POST ROUTES */
 
 /**
  * A post route for '/login'. When called a user is either logged in or they aren't
@@ -75,7 +80,7 @@ app.post('/login', (req,res) => {
     },
     (err,user) => {
         if (err) console.log(err);
-        else if (!user) console.log("No user found");                    
+        else if (!user) console.log("No user found");
         else {
             bcrypt.compare(req.body.password, user.password, (err, match) => {
                 if (err || match === null) res.redirect('/');
@@ -120,7 +125,7 @@ app.post('/register', (req,res) => {
             else if (person) {//If the username already exists
                 response.messages.push("invuser");
                 response.page = "register";
-            }                   
+            }
             if (req.body.password != req.body.r_password) {    //Passwords do not match
                 response.messages.push("passwordmatch");
                 response.page = "register";
@@ -128,7 +133,7 @@ app.post('/register', (req,res) => {
             else if (!req.body.password || !req.body.r_password) {  //No password input
                 response.messages.push("passwordempty");
                 response.page = "register";
-            }            
+            }
             else {
                 bcrypt.hash(req.body.password, 10, (err, hash) => {                     //Encrypt the password using bcrypt
                     user.password = hash;                                               //Update the model password with the encrypted one
@@ -138,12 +143,12 @@ app.post('/register', (req,res) => {
                             req.session.user = {
                                 name: req.body.username,
                                 isLoggedIn: true
-                            }; 
+                            };
                         }
                     });
                 });
             }
-            res.render('pages/index', response); 
+            res.render('pages/index', response);
         });
     }
 });
@@ -175,7 +180,7 @@ app.post('/getPlace', (req,res) => {
                     response.messages.push(element.formatted_address);
                 });
             }
-            res.render('pages/index', response); 
+            res.render('pages/index', response);
         }
         else {
             console.log("Error with getPlace" + error);
