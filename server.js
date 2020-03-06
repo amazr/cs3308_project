@@ -1,5 +1,4 @@
-  
-/* App requirements section */
+  /* App requirements section */
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
