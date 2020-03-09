@@ -203,7 +203,7 @@ app.post('/getPlace', (req,res) => {
     });
 });
 
-
+//Test comment
 /* THESE ARE EXAMPLE POSTS FOR TESTING API HOOKUPS! THEY WORK! :) */
 app.post('/testWeather', (req,res) => {
     let city = "London";
