@@ -30,37 +30,37 @@ Date         | What's new
 
 ## File Structure Overview:
 
-├── models
-│   ├── user.js
-├── node_modules
-├── resources
-│   ├── css
-│   │   ├── master.css
-│   ├── img
-│   │   ├── *.png
-│   ├── js
-│   │   ├── login.js
-│   └── └── register.js
-├── views
-│   ├── pages
-│   │   ├── index.ejs
-│   ├── partials
-│   │   ├── add-card.ejs
-│   │   ├── boostrap.ejs
-│   │   ├── cardDeck.ejs
-│   │   ├── login-modal.ejs
-│   │   ├── nav.ejs
-│   │   ├── registerFormd.ejs
-│   └── └── temp.ejs
-├── .env
-├── .gitignore
-├── app.yaml
-├── package-lock.json
-├── package.json
-├── README.md
-├── routes.js
-└── server.js
-
+├── models  
+│   ├── user.js  
+├── node_modules  
+├── resources  
+│   ├── css  
+│   │   ├── master.css  
+│   ├── img  
+│   │   ├── *.png  
+│   ├── js  
+│   │   ├── login.js  
+│   └── └── register.js  
+├── views  
+│   ├── pages  
+│   │   ├── index.ejs  
+│   ├── partials  
+│   │   ├── add-card.ejs  
+│   │   ├── boostrap.ejs  
+│   │   ├── cardDeck.ejs  
+│   │   ├── login-modal.ejs  
+│   │   ├── nav.ejs  
+│   │   ├── registerFormd.ejs  
+│   └── └── temp.ejs  
+├── .env  
+├── .gitignore  
+├── app.yaml  
+├── package-lock.json  
+├── package.json  
+├── README.md  
+├── routes.js  
+└── server.js  
+  
 - **models**
   - This directory holds the file *user.js*. This is what is called a schema, it is essentially a pre-made db structure. We can reference this file when making calls to the db so we can make sure we send data in the correct structure, and know what structure to expect when we request data. 
 - **node_modules**
