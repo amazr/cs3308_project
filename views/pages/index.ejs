@@ -7,6 +7,7 @@
         <script src="/js/login.js"></script>
         <script src="/js/register.js"></script>
         <script src="/js/addCard.js"></script>
+        <link rel="stylesheet" href="css/master.css">
     </head>
     <body>
         <%- include('../partials/nav') %>
@@ -22,18 +23,6 @@
                 </div>
             <% } %>
         </div>
-        <div class="card-deck" id="weather_deck">
-            <% for (var i = 0; i < cards.length; i++) { %>
-                <div class="card">
-                    <div class="card-header">
-                        <h1><%= cards[i].title %></h1>
-                    </div>
-                    <div class="card-body">
-                        <p><%= cards[i].currentTemp %> F</p>
-                        <p><%= cards[i].conditions %></p>
-                    </div>
-                </div>
-            <% } %>
-        </div>
+        <%- include('../partials/cardDeck') %>
     </body>
 </html>
