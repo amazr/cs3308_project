@@ -28,7 +28,7 @@ Date         | What's new
 * Please run 'npm install' everytime you pull just incase extra dependencies were installed since the last time you pulled.
 * 'killall node' might help if you cannot connect to localhost but the server is running
 
-##File Structure Overview:
+## File Structure Overview:
 
 ├── models
 │   ├── user.js
