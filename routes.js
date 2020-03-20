@@ -26,11 +26,13 @@ function createNewResponse() {
     };
 }
 
-function addCardToResponse(newTitle, newCurrentTemp, newConditions) {
+function addCardToResponse(newTitle, newCurrentTemp, newConditions, imageSource, timeTo) {
     unsavedCards.push({
         title: newTitle,
         currentTemp: newCurrentTemp,
-        conditions: newConditions
+        conditions: newConditions,
+        imageSource: imageSource,
+        timeTo: timeTo
     });
 }
 
@@ -53,12 +55,10 @@ function KtoC(tempK) {
  */
 app.get('/', (req,res) => {
     let response = createNewResponse();
-
     if (req.session.user) {
         response.isLoggedIn = req.session.user.isLoggedIn;
         response.username = req.session.user.name;
     }
-    console.log(response);
     res.render('pages/index', response);
 });
 
@@ -187,14 +187,45 @@ app.post('/logout', (req,res) => {
     res.redirect('/');
 });
 
+/** TODO: consider using the destination name from google's api to pass into openweather? or maybe use google places somewhere in here!
+ * A post route for '/getPlace'. Called when a user wishes to create a weather card. It calls the correct API's and sends the correct information to front-end
+ * @returns This route redirects to '/'. Passes 'invplace' if there was an error, else it will pass weather and destination stuff. 
+ */
 app.post('/getPlace', (req,res) => {
     let response = createNewResponse();
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${req.body.newPlace}&appid=${process.env.OPENWEATHER}`
-    request(url, (error, resp, body) => {
+    let urlWeather = `https://api.openweathermap.org/data/2.5/weather?q=${req.body.newPlace}&appid=${process.env.OPENWEATHER}`
+    request(urlWeather, (error, resp, body) => {
         if (!error && resp.statusCode == 200) { //On success
-            let bodyJSON = JSON.parse(body);
-            addCardToResponse(bodyJSON.name, KtoF(bodyJSON.main.temp) ,bodyJSON.weather[0].main)
-            res.redirect('/');
+            let weatherJSON = JSON.parse(body);
+            let name = weatherJSON.name + ', ' + weatherJSON.sys.country;
+            let origin = "Boulder";     //This is a placeholder, eventually get from req.session! (or maybe a slider)
+            let destination = weatherJSON.name;
+            let imageSource = "error.png";
+            if (weatherJSON.weather[0].main === "Clouds") {
+                imageSource = "img/cloudy.png"
+            }
+            else if (weatherJSON.weather[0].main === "Snow") {
+                imageSource = "img/snow.png"
+            }
+            else if (weatherJSON.weather[0].main === "Clear") {
+                imageSource = "img/sunny.png"
+            }
+            else if (weatherJSON.weather[0].main === "Rain") {
+                imageSource = "img/rainy.png"
+            }
+            let urlGoogle = `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${destination}&key=${process.env.GOOGLE}`;
+            request(urlGoogle, (error, response, body) => {
+                if (!error && response.statusCode == 200) { //On Success
+                    let googleJSON = JSON.parse(body);
+                    let timeTo = googleJSON.rows[0].elements[0].duration.text;
+                    addCardToResponse(name, KtoF(weatherJSON.main.temp), weatherJSON.weather[0].main, imageSource, timeTo);
+                    res.redirect('/');
+                }
+                else {                                      //On Failure
+                    response.messages.push("invplace");
+                    res.render('pages/index', response);
+                }
+            });
         }
         else {      //IF A PLACE WAS INVALID
             response.messages.push("invplace");
