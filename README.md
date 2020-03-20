@@ -61,36 +61,36 @@ Date         | What's new
 ├── routes.js
 └── server.js
 
--**models**
-  -This directory holds the file *user.js*. This is what is called a schema, it is essentially a pre-made db structure. We can reference this file when making calls to the db so we can make sure we send data in the correct structure, and know what structure to expect when we request data. 
--**node_modules**
-  -This is where all of our dependencies are installed. You should never have to open this.
--**resources**
-  -This is where our static resources live. Static resources include client-side js, images, and css. If we reference things that live here we never need to include resources. For example, to link *login.js* we call *js/login.js*, NOT *resources/js/login.js*.
--**views**
-  -**pages**
-    -This includes our *index.ejs* file. This ejs file changes based on data from the backend. What is displayed to the user is actually a mix of partials loaded into this file. Check the ejs *include* commands.
-  -**partials**
-    -*add-card* Contains the search bar and add button form. Triggers POST-getPlace.
-    -*bootstrap* Contains the links for bootstrap
-    -*cardDeck* HTML for the card deck AND cards, subject to HEAVY change
-    -*login-modal* HTML for the login modal
-    -*nav* HTML for the nav bar
-    -*registerForm* Page for when a user wants to register, this also links to *register.js*.
-    -*temp* This is never loaded as of now, contains buttons for testing API calls
--**.env**
-  -This is a secret file containing our API keys! Each key is stored in a variable name. These can be referenced in our backend, example: *process.env.MONGOURL*.
--**.gitignore**
-  -Tells git to ignore certain files. You can override this, but please don't ever do that.
--**app.yaml**
-  -Currently not in use, but we can use this to host our project on Google Cloud.
--**package-lock.json**
-  -Honestly, just ignore this. It is dynamically generated from npm.
--**package.json**
-  -This file tells node what dependencies we have loaded. When you run 'npm install' it looks for this file and installs listed dependencies. We also define other app behavior there, like what file to run when we type 'npm start' and if we want to run any other scripts, such as nodemon, when we start up.
--**README.md**
-  -Hopefully you know what this is...
--**routes.js**
-  -This file contains all of our routes, and is linked to by server.js. A lot happens here, but each route is documented in the file.
--**server.js**
-  -This file contains our sever setup. It sets our view engine (ejs), connects to our database, loads our static resources, sets up sessioning, links some dependencies. This file will rarely need to be changed or looked at.
+- **models**
+  - This directory holds the file *user.js*. This is what is called a schema, it is essentially a pre-made db structure. We can reference this file when making calls to the db so we can make sure we send data in the correct structure, and know what structure to expect when we request data. 
+- **node_modules**
+  - This is where all of our dependencies are installed. You should never have to open this.
+- **resources**
+  - This is where our static resources live. Static resources include client-side js, images, and css. If we reference things that live here we never need to include resources. For example, to link *login.js* we call *js/login.js*, NOT *resources/js/login.js*.
+- **views**
+  - **pages**
+    - This includes our *index.ejs* file. This ejs file changes based on data from the backend. What is displayed to the user is actually a mix of partials loaded into this file. Check the ejs *include* commands.
+  - **partials**
+    - *add-card* Contains the search bar and add button form. Triggers POST-getPlace.
+    - *bootstrap* Contains the links for bootstrap
+    - *cardDeck* HTML for the card deck AND cards, subject to HEAVY change
+    - *login-modal* HTML for the login modal
+    - *nav* HTML for the nav bar
+    - *registerForm* Page for when a user wants to register, this also links to *register.js*.
+    - *temp* This is never loaded as of now, contains buttons for testing API calls
+- **.env**
+  - This is a secret file containing our API keys! Each key is stored in a variable name. These can be referenced in our backend, example: *process.env.MONGOURL*.
+- **.gitignore**
+  - Tells git to ignore certain files. You can override this, but please don't ever do that.
+- **app.yaml**
+  - Currently not in use, but we can use this to host our project on Google Cloud.
+- **package-lock.json**
+  - Honestly, just ignore this. It is dynamically generated from npm.
+- **package.json**
+  - This file tells node what dependencies we have loaded. When you run 'npm install' it looks for this file and installs listed dependencies. We also define other app behavior there, like what file to run when we type 'npm start' and if we want to run any other scripts, such as nodemon, when we start up.
+- **README.md**
+  - Hopefully you know what this is...
+- **routes.js**
+  - This file contains all of our routes, and is linked to by server.js. A lot happens here, but each route is documented in the file.
+- **server.js**
+  - This file contains our sever setup. It sets our view engine (ejs), connects to our database, loads our static resources, sets up sessioning, links some dependencies. This file will rarely need to be changed or looked at.
