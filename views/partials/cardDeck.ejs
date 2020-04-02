@@ -1,21 +1,6 @@
 <br>
 <div class="container-fluid">
     <div class="row flex-row card-deck" id="weather_deck">
-        <% for (var i = 0; i < cards.length; i++) { %>
-            <div class="col-2">
-                <br>
-                <div class="card card-block">
-                    <div class="card-header">
-                        <h1><%= cards[i].title %></h1>
-                    </div>
-                    <div class="card-body" align="center">
-                        <img src="<%=cards[i].imageSource%>" alt="<%= cards[i].conditions %>.png" class="weather-image">
-                        <p>Temperature: <%= cards[i].currentTemp %> F</p>
-                        <p>Conditions: <%= cards[i].conditions %></p>
-                        <p style="font-size: 12px;">Time From {current location}: <%= cards[i].timeTo %></p>
-                    </div>
-                </div>
-            </div>
-        <% } %>
+        <%- include('../partials/weatherCard') %>
     </div>
 </div>

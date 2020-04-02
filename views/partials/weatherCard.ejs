@@ -1,0 +1,16 @@
+<% for (let i = 0; i < cards.length; i++) { %>
+    <div class="col-2">
+        <br>
+        <div class="card card-block">
+            <div class="card-header" align="center">
+                <h4><%= cards[i].title %></h4>
+            </div>
+            <div class="card-body" align="center">
+                <img src="<%=cards[i].imageSource%>" alt="<%= cards[i].conditions %>.png" class="weather-image">
+                <p>Temperature: <%= cards[i].currentTemp %> F</p>
+                <p>Conditions: <%= cards[i].conditions %></p>
+                <p style="font-size: 12px;"><%= cards[i].timeTo %></p>
+            </div>
+        </div>
+    </div>
+<% } %>

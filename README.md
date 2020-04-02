@@ -11,6 +11,7 @@ Date         | What's new
 3/6 | Added basic structure and server response for cards. Only provides current weather and such.
 3/19 | This is from our most recent group meeting. You can now search for cards and add them to a list that displays temp and weather. Lists are not able to be saved just yet!
 3/19 cont. | Added some styling to the cards. Made cards lists overflow downward. Added time to location to the cards as well. By default the destination is set to Boulder, CO. We will make this adjustable in the future, must discuss how we would like to implement this.
+4/1 | TODO: I added a dropdown menu for logged in users. This menu needs to get populated by user lists and contain a link for creating a new list.
 
 
 ## Getting up and running:

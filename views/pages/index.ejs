@@ -15,12 +15,26 @@
             <% if (page === "register") { %>
                 <%- include('../partials/registerForm') %>
             <% } else { %>
-                <div class="container mt-4">
-                    <%- include('../partials/add-card') %>
-                    <% if (messages.includes("invplace")) { %>
-                        <p>No Results Found :(</p>
-                    <% } %>
-                </div>
+                <% if (isLoggedIn === true) { %>
+                    <div class="container mt-4 row">
+                        <div class="col-6 p-0 align-self-center">
+                            <%- include('../partials/createList') %>
+                        </div>
+                        <div class="col-6 p-0 align-self-center">
+                            <%- include('../partials/add-card') %>
+                            <% if (messages.includes("invplace")) { %>
+                                <p>No Results Found :(</p>
+                            <% } %>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <div class="container mt-4">
+                        <%- include('../partials/add-card') %>
+                        <% if (messages.includes("invplace")) { %>
+                            <p>No Results Found :(</p>
+                        <% } %>
+                    </div>
+                <% } %>
             <% } %>
         </div>
         <%- include('../partials/cardDeck') %>

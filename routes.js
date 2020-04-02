@@ -26,6 +26,10 @@ function createNewResponse() {
     };
 }
 
+function clearCardDeck() {
+    unsavedCards = [];
+}
+
 function addCardToResponse(newTitle, newCurrentTemp, newConditions, imageSource, timeTo) {
     unsavedCards.push({
         title: newTitle,
@@ -42,6 +46,24 @@ function KtoF(tempK) {
 
 function KtoC(tempK) {
     return K-273.15;
+}
+
+function getWeatherImage(condition) {
+    if (condition === "Clouds" || condition === "Mist" || condition === "Haze") {
+        return "img/cloudy.png";
+    }
+    else if (condition === "Snow") {
+        return "img/snow.png";
+    }
+    else if (condition === "Clear") {
+        return "img/sunny.png";
+    }
+    else if (condition === "Rain") {
+        return "img/rainy.png";
+    }
+    else {
+        return "error.png";
+    }
 }
 
 
@@ -104,8 +126,9 @@ app.post('/login', (req,res) => {
         else if (!user) console.log("No user found");
         else {
             bcrypt.compare(req.body.password, user.password, (err, match) => {
-                if (err || match === null) res.redirect('/');
+                if (err || match === null) res.redirect('/');                       //TODO - login error 
                 if (match) {
+                    clearCardDeck();
                     req.session.user = {
                         name: user.username,
                         isLoggedIn: true
@@ -197,27 +220,15 @@ app.post('/getPlace', (req,res) => {
     request(urlWeather, (error, resp, body) => {
         if (!error && resp.statusCode == 200) { //On success
             let weatherJSON = JSON.parse(body);
-            let name = weatherJSON.name + ', ' + weatherJSON.sys.country;
             let origin = "Boulder";     //This is a placeholder, eventually get from req.session! (or maybe a slider)
             let destination = weatherJSON.name;
-            let imageSource = "error.png";
-            if (weatherJSON.weather[0].main === "Clouds") {
-                imageSource = "img/cloudy.png"
-            }
-            else if (weatherJSON.weather[0].main === "Snow") {
-                imageSource = "img/snow.png"
-            }
-            else if (weatherJSON.weather[0].main === "Clear") {
-                imageSource = "img/sunny.png"
-            }
-            else if (weatherJSON.weather[0].main === "Rain") {
-                imageSource = "img/rainy.png"
-            }
+            let imageSource = getWeatherImage(weatherJSON.weather[0].main);
             let urlGoogle = `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${destination}&key=${process.env.GOOGLE}`;
             request(urlGoogle, (error, response, body) => {
                 if (!error && response.statusCode == 200) { //On Success
                     let googleJSON = JSON.parse(body);
-                    let timeTo = googleJSON.rows[0].elements[0].duration.text;
+                    let name = googleJSON.destination_addresses[0];
+                    let timeTo = `From ${googleJSON.origin_addresses[0]}: ${googleJSON.rows[0].elements[0].duration.text}`; //A bug with undefined travel times!
                     addCardToResponse(name, KtoF(weatherJSON.main.temp), weatherJSON.weather[0].main, imageSource, timeTo);
                     res.redirect('/');
                 }
