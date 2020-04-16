@@ -22,7 +22,8 @@ function createNewResponse() {
         username: "",
         page: "",
         messages: [],
-        cards: unsavedCards
+        cards: unsavedCards,
+        lists: []
     };
 }
 
@@ -80,7 +81,9 @@ app.get('/', (req,res) => {
     if (req.session.user) {
         response.isLoggedIn = req.session.user.isLoggedIn;
         response.username = req.session.user.name;
+        response.lists = req.session.user.lists;
     }
+    console.log(response.lists);
     res.render('pages/index', response);
 });
 
@@ -131,7 +134,8 @@ app.post('/login', (req,res) => {
                     clearCardDeck();
                     req.session.user = {
                         name: user.username,
-                        isLoggedIn: true
+                        isLoggedIn: true,
+                        lists: user.lists
                     };
                     res.redirect('/');
                 }
@@ -243,6 +247,43 @@ app.post('/getPlace', (req,res) => {
             res.render('pages/index', response);
         }
     });
+});
+
+app.post('/save-list', (req,res) => {
+    let response = createNewResponse();
+
+    //This object should follow the listSchema defined in user.js
+    //Maybe open up something and ask the user for a name?
+    let listItem = { 
+        name: "example", 
+        locations: [] 
+    };
+
+    //Make sure the user has some cards and then find the user and update the database with the new list
+    if (unsavedCards.length >= 1)
+    {
+        for (let i = 0; i < unsavedCards.length; i++) 
+        {
+            listItem.locations.push(unsavedCards[i].title);
+        }
+        userModel.findOneAndUpdate(
+            //Field 1: Query
+        {
+            username: req.session.user.name,
+        },
+            //Field 2: Update (pushed listItem to users lists array)
+        { 
+            $push: { lists: listItem  }
+        },
+        function (error, success)
+        {
+            if (error) 
+            { 
+                console.log(error);
+            }
+        });
+    }
+    res.redirect('/');
 });
 
 //Test comment
