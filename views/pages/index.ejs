@@ -16,11 +16,19 @@
                 <%- include('../partials/registerForm') %>
             <% } else { %>
                 <% if (isLoggedIn === true) { %>
-                    <div class="container mt-4 row">
-                        <div class="col-6 p-0 align-self-center">
+                    <div class="container mt-4 d-flex justify-content-between">
+                        <div class="col-2 p-0 align-self-center">
                             <%- include('../partials/createList') %>
                         </div>
-                        <div class="col-6 p-0 align-self-center">
+                        <div class="col-2 p-0 align-self-center">
+                            <form action="/saveList" method="POST">
+                                <div class="row">
+                                    <input class="form-control col-6" type="text" placeholder="List Name" name="listName">
+                                    <button class="btn btn-primary" type="submit">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-8 p-0 align-self-center">
                             <%- include('../partials/add-card') %>
                             <% if (messages.includes("invplace")) { %>
                                 <p>No Results Found :(</p>
