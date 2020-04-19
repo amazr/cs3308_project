@@ -23,7 +23,9 @@ function loginPost(req, res)
         {
             bcrypt.compare(req.body.password, user.password, (err, match) => 
             {   
-                if (err || match === null) res.redirect('/'); //This if statement is if the password is incorrect                      
+                //If the password was INCORRECT
+                if (err || match === null) res.redirect('/');
+                //If the password was CORRECT                     
                 if (match) 
                 {
                     req.session.user = {

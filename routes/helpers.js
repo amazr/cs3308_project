@@ -1,3 +1,5 @@
+//This function creates a new response for EJS
+//This should always be called to generate a response template if you are passing data to the frontend
 function createNewResponse(cards) {
     return {
         isLoggedIn: false,
@@ -17,20 +19,26 @@ function KtoC(tempK) {
     return K-273.15;
 }
 
+//The goal of this function is to serve an image url for the weather cards
 function getWeatherImage(condition) {
-    if (condition === "Clouds" || condition === "Mist" || condition === "Haze") {
+    if (condition === "Clouds" || condition === "Mist" || condition === "Haze") 
+    {
         return "img/cloudy.png";
     }
-    else if (condition === "Snow") {
+    else if (condition === "Snow") 
+    {
         return "img/snow.png";
     }
-    else if (condition === "Clear") {
+    else if (condition === "Clear") 
+    {
         return "img/sunny.png";
     }
-    else if (condition === "Rain") {
+    else if (condition === "Rain") 
+    {
         return "img/rainy.png";
     }
-    else {
+    else 
+    {
         return "error.png";
     }
 }

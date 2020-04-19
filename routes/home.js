@@ -2,6 +2,7 @@ const helpers = require('./helpers');
 
 function homeGet(req, res)
 {
+    //This initializes the cards array in the users session (should get called the first time that someone loads the '/' page)
     if (!req.session.cards)
     {
         req.session.cards = [];

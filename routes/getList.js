@@ -2,6 +2,7 @@ const userModel = require('../models/user');
 const helpers = require('./helpers');
 
 //This route is intended to search for a list and then load it into response cards
+//IT IS NOT FINISHED
 function getList(req, res)
 {
     req.session.cards = [];
