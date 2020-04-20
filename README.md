@@ -14,6 +14,7 @@ Date         | What's new
 4/1 | TODO: I added a dropdown menu for logged in users. This menu needs to get populated by user lists and contain a link for creating a new list.
 4/18 | A lot has changed. Created a routes directory and moved routes.js there. I also moved all of the route behaviors into their own js files, so routes.js only calls functions from their own js file. I made this change to isolate behaviors and make code easier to adjust and understand. I also added the ability for users to store their own lists. Lists should be loaded into the db, and will be selectable from a dropdown list. The frontend and backend for this feature was also finished. I also removed the file structure tree because it is now obsolute and will continue to change.
 4/20 | Redid the entire frontend to be way more responsive. Also made it space themed, because why not? Added a way to clearLists. Added a way to set the origin location when calculating travel times on the cards. Added a way for users to load a previously saved list. 
+4/20 cont. | Made it so that when a user saves a list their new list will show automatically in the list dropdown selector.
 
 ## Getting up and running:
 1. Clone this repo
