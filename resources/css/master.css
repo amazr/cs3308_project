@@ -1,4 +1,75 @@
+body {
+    background-color: #E8E8E8;
+}
 .weather-image {
     width: 60%;
     height: auto;
 }
+.background {
+    background-color: #E8E8E8;
+}
+.primary-color {
+    color: #FC814A;
+}
+.secondary-color {
+    color: #564256;
+}
+.dark-background {
+    background-color: #564256;
+    border: none;
+}
+
+.title {
+    color: #ffffff;
+}
+.inner-color {
+    background-color: #96939B;
+    border: none;
+}
+
+.inner-lightest-color {
+    background-color: #E8E8E8;
+    border: none;
+}
+
+.disabled {
+    background-color: #A9A9A9;
+    border: none;
+}
+
+.inner-light-color {
+    background-color: #BFBFBF;
+    border: none;
+}
+
+.nav-bar-background {
+    background-color: #FC814A;
+}
+
+.btn-jupiter {
+    background-color: #FC814A;
+    margin-bottom: 5px;
+}
+
+.card-jupiter {
+    border: none;
+}
+
+.card-jupiter-inner {
+    background-color: #FC814A;
+    border: none;
+}
+
+.blank-spacer {
+    margin-top: 100px;
+    line-height: 300px;
+    min-height: 300px;
+    height: 300px;
+ }
+
+ .small-spacer {
+    margin-top: 50px;
+    line-height: 50px;
+    min-height: 50px;
+    height: 50px;
+ }

@@ -1,26 +1,30 @@
 <div id="login-modal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Login</h5>
+        <div class="modal-header card-jupiter-inner">
+          
+          <span class="modal-title align-middle title">
+            <img class="rounded-circle" src="\img\jupiter.svg" alt="" width="50" height="40">
+            Jupiter Weather Station Earthling Access
+          </span>
+
+          
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <form id='login-form' action='login' method='POST'>
-            <div class="modal-body">
+            <div class="modal-body inner-color">
                 <div class='form-group mb-4'>
-                    <label class='col-12 justify-content-start p-0 mb-2' for="username">Enter Username:</label>
                     <input type="username" class="form-control col-12" placeholder="Username" name="username"> 
                 </div>
                 <div class='form-group'>
-                    <label class='col-12 justify-content-start p-0 mb-2' for="password">Enter Password:</label>
                     <input type="password" class="form-control col-12" placeholder="Password" name="password"> 
                 </div>
             </div>
-            <div class="modal-footer justify-content-between">
-                <a class="nav-link" href="/register">Sign Up!</a>
-                <button type="submit" onclick="form_submit('login-form')" class="btn btn-secondary ml-50" data-dismiss="modal">Login</button>
+            <div class="modal-footer justify-content-between dark-background">
+                <a class="nav-link primary-color" href="/register">Sign Up!</a>
+                <button type="submit" onclick="form_submit('login-form')" class="btn btn-secondary ml-50" data-dismiss="modal"><i class="fas fa-space-shuttle"></i> Login</button>
             </div>
         </form>
       </div>

@@ -8,7 +8,7 @@ function homeGet(req, res)
         req.session.cards = [];
     }
 
-    let response = helpers.createNewResponse(req.session.cards);
+    let response = helpers.createNewResponse(req.session);
 
     //If the user is logged in set the response accordingly
     if (req.session.user) 

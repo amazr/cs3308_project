@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const routes = require('./routes/routes');
+const tests = require('./routes/tests');
 const session = require('express-session');
 const bodyParser= require('body-parser');
 
@@ -18,6 +19,7 @@ app.use(session({
 }));
 app.use(express.static('resources'))
 app.use(routes);
+app.use(tests);
 
 /* Connect to mongoDB, throw errors to console */
 mongoose.connect(process.env.MONGOURL, {useNewUrlParser: true, useUnifiedTopology: true});

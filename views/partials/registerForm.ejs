@@ -1,6 +1,6 @@
 <form action="register" method="POST" class="pr-5 pl-5 m-5">
     <div id="username-group" class="pb-4 form-group">
-        <label class="font-weight-bold" for="username">Username</label>
+        <label class="font-weight-bold" for="username"><i class="fas fa-user"></i> Username</label>
         <input type="username" class="form-control" id="username-field" placeholder="Username" name="username">
         <% if (messages.includes("invuser")){ %>
             <script>register_error("invuser");</script>
@@ -10,11 +10,11 @@
         <% } %>
     </div>
     <div class="form-group">
-        <label class="font-weight-bold" for="password">Password</label>
+        <label class="font-weight-bold" for="password"><i class="fas fa-key"></i> Password</label>
         <input type="password" class="form-control" id="password-field" placeholder="Password" name="password">
     </div>
     <div id="password-group" class="form-group">
-        <label class="font-weight-bold" for="password">Repeat Password</label>
+        <label class="font-weight-bold" for="password"><i class="fas fa-key"></i> Repeat Password</label>
         <input type="password" class="form-control" id="r_password-field" placeholder="Repeated Password" name="r_password">
         <% if (messages.includes("passwordmatch")){ %>
             <script>register_error("passwordmatch");</script>
@@ -23,5 +23,5 @@
             <script>register_error("passwordempty");</script>
         <% } %>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-jupiter"><i class="fas fa-user-astronaut"></i> Sign-up!</button>
 </form>

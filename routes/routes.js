@@ -9,6 +9,8 @@ const login = require('./login');
 const logout = require('./logout');
 const getPlace = require('./getPlace');
 const saveList = require('./saveList');
+const getList = require('./getList');
+const setLocation = require('./setLocation');
 
 const app = express();
 
@@ -38,9 +40,15 @@ app.get('/register', (req,res) =>
 /**
  * A get route that is intended to fetch a users specific list
  */
-app.get('/list/:name', (req,res) => {
-    console.log("Attempting to get " + req.params.name);
-    res.redirect('/');
+app.get('/list/:name', (req,res) => 
+{
+    getList.getListGet(req, res);
+});
+
+app.get('/clearList', (req,res) =>
+{
+    req.session.cards = [];
+    res.redirect('/')
 });
 
 
@@ -95,6 +103,12 @@ app.post('/getPlace', (req,res) =>
 app.post('/saveList', (req,res) => 
 {
     saveList.saveListGet(req, res);
+});
+
+app.post('/setLocation', (req, res) =>
+{
+    //what this needs to do is go through all the lists and reset their location as well as set a location in req.session
+    setLocation.setLocationPost(req, res);
 });
 
 module.exports = app
