@@ -38,15 +38,11 @@ function saveList(req, res)
             if (error) 
             { 
                 console.log(error);
-                res.redirect('/');
-            }
-            else
-            {
-                req.session.user.lists.push(listItem);
-                res.redirect('/');
             }
         });
     }
+    
+    res.redirect('/');
 }
 
 module.exports = {

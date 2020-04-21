@@ -1,5 +1,13 @@
 <div class="dropdown">
-    <button type="button" <% if (isLoggedIn === false) { %> disabled <% } %> class="btn <% if (isLoggedIn === false) { %> disabled <% } else {%> btn-jupiter<% } %> dropdown-toggle" data-toggle="dropdown"><i class="fas fa-list"></i> Weather Lists</button>
+
+  <% if (isLoggedIn === false) { %>
+    <span tabindex="0" data-toggle="tooltip" title="This feature requires login!">
+  <% } %>
+    <button type="button" <% if (isLoggedIn === false) { %>style="pointer-events: none;" disabled <% } %> class="btn <% if (isLoggedIn === false) { %> disabled <% } else {%> btn-jupiter<% } %> dropdown-toggle" data-toggle="dropdown"><i class="fas fa-list"></i> Weather Lists</button>
+  <% if (isLoggedIn === false) { %>
+    </span>
+  <% } %>
+    
     <div class="dropdown-menu">
       <% for (let i = 0; i < lists.length; i++) { %>
         <a class="dropdown-item" href="/list/<%= lists[i].name %>"><%= lists[i].name %></a>

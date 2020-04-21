@@ -4,8 +4,7 @@
  * 
  */
 
-function register_error(message) 
-{
+function register_error(message) {
     if (message === "invuser" || message === "usernameempty") {
         document.getElementById("username-field").classList.add('is-invalid');
         let invText = document.createElement('p');
