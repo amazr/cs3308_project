@@ -16,6 +16,8 @@ Date         | What's new
 4/20 | Redid the entire frontend to be way more responsive. Also made it space themed, because why not? Added a way to clearLists. Added a way to set the origin location when calculating travel times on the cards. Added a way for users to load a previously saved list. 
 4/20 cont. | Made it so that when a user saves a list their new list will show automatically in the list dropdown selector.
 4/21 | Added some frontend animations. Also adjusted the user registration page. Changed how the search bars on the frontpage are laid out.
+4/22 | Added a toast for invalid locations. Also adjusted how user responses are generated, createNewResponse is now able to check whether a user is logged in and autofill other such information. Changed the routing for the register page a little bit.
+4/22 cont. | Created a modal to display directions from user origin to the destination (the title of the card). This modal opens upon a user clicking on the card. This costs 0.014 dollars everytime a direction has been loaded, so use sparingly... If no origin has been selected by the user then the map will open as just a single place. Loading just a single place on the map is free.
 
 ## Getting up and running:
 1. Clone this repo

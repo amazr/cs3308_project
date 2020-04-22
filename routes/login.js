@@ -48,7 +48,7 @@ function loginPost(req, res)
                         isLoggedIn: true,
                         lists: user.lists
                     };
-
+                    
                     res.redirect('/');
                 }
             });

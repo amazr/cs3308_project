@@ -9,12 +9,6 @@ function getList(req, res)
 {
     req.session.cards = [];
 
-    //Generate response assuming the user is logged in
-    let response = helpers.createNewResponse(req.session);
-    response.isLoggedIn = req.session.user.isLoggedIn;
-    response.username = req.session.user.name;
-    response.lists = req.session.user.lists;
-
     //Search the database for the current logged in user
     userModel.findOne(
         {

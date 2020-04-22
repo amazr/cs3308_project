@@ -7,9 +7,27 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+<script>
+    function  setMap (location, origin) {
+        let mode = "place";
+        if (origin)
+        {
+            mode = "directions";
+            $(".map-top").attr('src',`https://www.google.com/maps/embed/v1/${mode}?key=<%= (embedKey) ? embedKey : '' %>&origin=${origin}&destination=${location}`)
+        }
+        else
+        {
+            $(".map-top").attr('src',`https://www.google.com/maps/embed/v1/${mode}?key=<%= (embedKey) ? embedKey : '' %>&q="${location}`)
+        }
+
+        $('#map-modal').modal('show');
+    }
+</script>
+
 
 <% if (isLoggedIn === false) { %>
     <script>
+ 
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })

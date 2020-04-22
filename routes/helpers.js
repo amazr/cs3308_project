@@ -2,13 +2,14 @@
 //This should always be called to generate a response template if you are passing data to the frontend
 function createNewResponse(session) {
     return {
-        isLoggedIn: false,
-        username: "",
+        isLoggedIn: !!session.user,     
+        username: (session.user) ? session.user.name : "",
         page: "",
-        messages: [],
+        messages: (session.messages) ? session.messages: [],
         cards: isListValid(session.cards),
-        lists: [],
-        location: isValidLocation(session.origin)
+        lists: (session.user) ? session.user.lists: [],
+        location: isValidLocation(session.origin),
+        embedKey: process.env.GOOGLEEMBED
     };
 }
 

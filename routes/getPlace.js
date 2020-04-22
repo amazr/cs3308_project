@@ -14,8 +14,9 @@ async function getPlaceGet(req, res)
     }
     catch (error)
     {
-        console.log("Something went wrong...\n" + error);
+        req.session.messages.push("invplace");
     }
+
     res.redirect('/')
 }
 

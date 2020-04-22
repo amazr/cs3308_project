@@ -5,6 +5,9 @@ body {
     width: 60%;
     height: auto;
 }
+.weather-card {
+    cursor: pointer;
+}
 .background {
     background-color: #E8E8E8;
 }
