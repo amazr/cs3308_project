@@ -24,6 +24,28 @@
     }
 </script>
 
+<script>
+    function getTempColor(temp)
+    {
+        if (temp <= 32)
+        {
+            return "bg-info";
+        }
+        else if (temp > 32 && temp < 80)
+        {
+            return "bg-success";
+        }
+        else if (temp >= 80 && temp < 100)
+        {
+            return "bg-warning";
+        }
+        else if (temp >= 100)
+        {
+            return "bg-danger";
+        }
+    }
+</script>
+
 
 <% if (isLoggedIn === false) { %>
     <script>

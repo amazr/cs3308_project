@@ -66,6 +66,8 @@ function getAllCardData(location, req)
                         resolve({
                             title: name,
                             currentTemp: helpers.KtoF(weatherJSON.main.temp),
+                            minTemp: helpers.KtoF(weatherJSON.main.temp_min),
+                            maxTemp: helpers.KtoF(weatherJSON.main.temp_max),
                             conditions: weatherJSON.weather[0].main,
                             imageSource: imageSource,
                             timeTo: timeTo,
