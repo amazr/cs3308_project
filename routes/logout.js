@@ -4,7 +4,6 @@ function logoutGet(req, res)
     if(req.session.user) 
     {
         delete req.session.user;
-        delete req.session.cards;
     }
 
     res.redirect('/');

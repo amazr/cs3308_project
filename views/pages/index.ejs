@@ -6,41 +6,47 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src="/js/login.js"></script>
         <script src="/js/register.js"></script>
-
+        
+        <!-- <script src="/js/addCard.js"></script> -->
         <link rel="stylesheet" href="css/master.css">
     </head>
-    <body>
+    <body class="bodyBg">
         <%- include('../partials/nav') %>
-       
         <div class="container">
-
-                <%- include('../partials/toast') %>
-   
             <% if (page === "register") { %>
                 <%- include('../partials/registerForm') %>
             <% } else { %>
-
-                    <div class="mt-4 row d-flex justify-content-around">
-                        <h1 class="display-6 text-center d-md-block d-none mb-5 mt-5 col-12"><span class="primary-color">Jupiter</span> <img class="rounded-circle animated rotateIn" src="\img\jupiter.svg" alt="" width="100" height="100"> Weather</h1>
-                        <h1 class="display-6 text-center d-xs-block d-md-none mb-5 mt-5 col-12"><span class="primary-color">J</span> <img class="rounded-circle animated rotateIn" src="\img\jupiter.svg" alt="" width="100" height="100"> W</h1>
-
-                    
-                        <%- include('../partials/add-card') %>
-                        <%- include('../partials/my-location') %>
+                <% if (isLoggedIn === true) { %>
+                    <div class="container mt-4 d-flex justify-content-between">
+                        <div class="col-2 p-0 align-self-center">
+                            <%- include('../partials/createList') %>
+                        </div>
+                        <div class="col-2 p-0 align-self-center">
+                            <form action="/saveList" method="POST">
+                                <div class="row">
+                                    <input class="form-control col-6" type="text" placeholder="List Name" name="listName">
+                                    <button class="btn btn-primary" type="submit">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-8 p-0 align-self-center">
+                            <%- include('../partials/add-card') %>
+                            <% if (messages.includes("invplace")) { %>
+                                <p>No Results Found :(</p>
+                            <% } %>
+                        </div>
                     </div>
-          
+                <% } else { %>
+                    <div class="container mt-4">
+                        <%- include('../partials/add-card') %>
+                        <% if (messages.includes("invplace")) { %>
+                            <p>No Results Found :(</p>
+                        <% } %>
+                    </div>
+                <% } %>
             <% } %>
-            <% if (page !== "register") { %>
-                <div class="row d-flex justify-content-around">
-                    <%- include('../partials/cardDeck') %>
-                </div>
-            <% } %>
-
         </div>
-
-        <div class="small-spacer"></div>
-        
-               <%- include('../partials/javascript') %>
-               <%- include('../partials/map-modal') %>
+        <%- include('../partials/cardDeck') %>
+        <script src="/js/index.js"></script>
     </body>
 </html>

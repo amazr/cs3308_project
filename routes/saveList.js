@@ -3,7 +3,7 @@ const helpers = require('./helpers');
 
 function saveList(req, res)
 {
-    let response = helpers.createNewResponse(req.session);
+    let response = helpers.createNewResponse(req.session.cards);
 
     //This object should follow the listSchema defined in user.js
     //Maybe open up something and ask the user for a name?
@@ -38,15 +38,11 @@ function saveList(req, res)
             if (error) 
             { 
                 console.log(error);
-                res.redirect('/');
-            }
-            else
-            {
-                req.session.user.lists.push(listItem);
-                res.redirect('/');
             }
         });
     }
+    
+    res.redirect('/');
 }
 
 module.exports = {

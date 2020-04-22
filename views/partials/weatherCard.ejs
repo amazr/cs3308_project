@@ -1,55 +1,27 @@
-<% if (cards.length == 0) { %>
-
-<div class="blank-spacer text-center col-12">
-    <div class="display-1 title">
-        <i class="fas fa-meteor"></i>
-        <div class="title h5 col-12 text-center">Nothing to see here...</div>
-    </div>
-</div>
-
-
-<% } %>
-
 <% for (let i = 0; i < cards.length; i++) { %>
-    <div class="col-md-4 animated bounceIn col-lg-3 col-sm-6 col-xs-12 mt-3 mb-2 weather-card"  onclick="setMap('<%= cards[i].title %>', '<%= cards[i].origin %>');">
-        <div class="card card-jupiter card-block ml-0 mr-0">
-            <div class="card-header card-jupiter-inner" align="center">
-                <h6><i class="fas fa-map-marker-alt float-left"></i> <%= cards[i].title %></h6>
+    <div class="col-2">
+        <br>
+        <div class="card card-block card-border-custom" >
+            <div class="card-header" align="center" style="background-color:#bdeaee;border-bottom:5px dashed #76b4bd">
+                <h4 ><%= cards[i].title %></h4>
             </div>
-            <div class="card-body inner-lightest-color" align="center">
-                <img src="<%=cards[i].imageSource%>" alt="<%= cards[i].conditions %>.png" class="weather-image">
-                <% if (cards[i].currentTemp <= 40) { var thermColor = "bg-info" } %>
-                <% if (cards[i].currentTemp > 40 && cards[i].currentTemp < 80) { var thermColor = "bg-success" } %>
-                <% if (cards[i].currentTemp >= 80 && cards[i].currentTemp < 100) { var thermColor = "bg-warning" } %>
-                <% if (cards[i].currentTemp >= 100) { var thermColor = "bg-danger" } %>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Condition</th>
-                            <th scope="col"><%=cards[i].conditions%></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">Current</th>
-                            <td class="<%= thermColor %>"><%=cards[i].currentTemp%>F</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Min</th>
-                            <td><%=cards[i].minTemp%>F</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Max</th>
-                            <td><%=cards[i].maxTemp%>F</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p style="font-size: 10px;"><%= cards[i].timeTo %></p>
+            <div class="card-body" style="background-color: #ebf4f6;">
+                <div style="text-align: center;margin-bottom:20px">
+                    <img src="<%=cards[i].imageSource%>" alt="<%= cards[i].conditions %>.png" class="weather-image">
+                </div>
+                <p class="row">
+                    <img src="./img/temp.png" class="col-4"/> 
+                    <span class="col-8"><%= cards[i].currentTemp %> F</span>
+                </p>
+                <p class="row">
+                    <img src="./img/condition.png" class="col-4"/> 
+                    <span class="col-8"><%= cards[i].conditions %></span>
+                </p>
+                <p class="row">
+                    <img src="./img/time.png" style="width:25px;height:25px" class="col-4"/> 
+                    <span class="col-8"><%= cards[i].timeTo %></span>
+                </p>
             </div>
         </div>
     </div>
-<% } %>
-
-<% if (messages.includes("invplace")) { %>
-<div class="invalid-place"></div>
 <% } %>

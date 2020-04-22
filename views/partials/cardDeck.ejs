@@ -1,28 +1,6 @@
-
-<div class="card mt-4 justify-content-center inner-light-color col-12">
-
-    <div class="form-group mt-2">
-        <div class="title "><i class="fas fa-globe-americas"></i> Locations <a class="badge badge-secondary float-right" href="/clearList"><i class="fas fa-window-close"></i> Clear List</a></div>
-        
-
-        <div class="row d-flex justify-content-between ">
-            <div class="ml-2 col-2 col-xs-12 p-0 align-self-center d-none d-sm-block">
-                <%- include('../partials/createList') %>
-            </div>
-        
-            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-12 p-0 align-self-center">
-                <form action="/saveList" method="POST">
-                    <div class="row" <% if (isLoggedIn === false) { %> data-toggle="tooltip" title="This feature requires login!" <% } %>> 
-                        <input class="form-control col-md-8 col-sm-6 col-lg-8 d-none d-sm-block <% if (isLoggedIn === false) { %> disabled <% } %>" type="text" <% if (isLoggedIn === false) { %> style="pointer-events: none;" disabled <% } %> placeholder="List Name" name="listName">
-                        <button class="btn ml-1 d-none d-sm-block <% if (isLoggedIn === false) { %> disabled <% } else {%> btn-jupiter<% } %>" <% if (isLoggedIn === false) { %> style="pointer-events: none;" disabled <% } %> type="submit"><i class="fas fa-save"></i> Save</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-    </div>
-    <div class="card-deck" id="weather_deck">
-        
+<br>
+<div class="container-fluid">
+    <div class="row flex-row card-deck" id="weather_deck">
         <%- include('../partials/weatherCard') %>
     </div>
 </div>
