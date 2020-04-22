@@ -14,8 +14,8 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({
     'secret': process.env.SECRET,
-    saveUninitialized: true,
-    resave: false
+    saveUninitialized: false,
+    resave: true
 }));
 app.use(express.static('resources'))
 app.use(routes);
