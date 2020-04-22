@@ -22,39 +22,42 @@
 
         $('#map-modal').modal('show');
     }
-</script>
 
-<script>
-    function getTempColor(temp)
-    {
-        if (temp <= 32)
-        {
-            return "bg-info";
-        }
-        else if (temp > 32 && temp < 80)
-        {
-            return "bg-success";
-        }
-        else if (temp >= 80 && temp < 100)
-        {
-            return "bg-warning";
-        }
-        else if (temp >= 100)
-        {
-            return "bg-danger";
-        }
+    function loadCards () {
+        $(".card-deck").load('/cards');
     }
+
+    function addPlace () {
+
+        //Check which version of the textbox is populated
+        if ($("#newPlace1").val() != "") {
+            var payload = {newPlace: $("#newPlace1").val()};
+        } else if ($("#newPlace2").val() != "") {
+            var payload = {newPlace: $("#newPlace2").val()};
+        } else {
+            //Do nothing. Blank value
+        }
+
+        //Make the post request
+        var returnData =$.post("/getPlace",payload).done(function(data){
+                //Load new cards in callback function
+                loadCards();
+            });
+
+        //Check returned data for 'invalid-place' div flag
+        returnData.done(function( data ) {
+            if ($( data ).find( ".invalid-place" ).length >0) {
+                $('.toast').toast('show');
+            }
+        });
+
+        //Clear textbox
+        $("#newPlace1").val("");
+        $("#newPlace2").val("");
+    }
+
 </script>
 
-
-<% if (isLoggedIn === false) { %>
-    <script>
- 
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-    </script>
-<% } %>
 
 <% if (messages.includes("invplace")) { %>
     <script>

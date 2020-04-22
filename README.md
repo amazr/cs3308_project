@@ -20,6 +20,7 @@ Date         | What's new
 4/22 cont. | Created a modal to display directions from user origin to the destination (the title of the card). This modal opens upon a user clicking on the card. This costs 0.014 dollars everytime a direction has been loaded, so use sparingly... If no origin has been selected by the user then the map will open as just a single place. Loading just a single place on the map is free.
 4/22 cont2. | Fixed some sizing issues with the map modal. Also added weather image icons for every kind of weather condition (including night images). These images come directly from openweather, and thus match all of their weather codes.
 4/22 cont3. | Added more data to the weather cards, min and max temp. Changed the way the data is displayed on the cards to be a bootstrap table. The cell for the current temperature now gets a snazzy color! The color can be blue, green, yellow, or red depending on how hot or cold the temperature is. (I think the next objective is the make a unit change button).
+4/22 cont4. | This is a tricky change. Essentially we have the page only reload the weather cards. This way, if you're trying to add a new card to the list, the page doesn't reload entirely. Why is this cool? Well, it doesn't change your view back to the top of the page. This also gives us the option to append to the cards list locally and prevent that bouncing animation from happening to all the cards on page reload.
 
 ## Getting up and running:
 1. Clone this repo

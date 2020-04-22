@@ -4,6 +4,7 @@ const helpers = require('./helpers');
 
 //Requirements for route behavior
 const home = require('./home');
+const cards = require('./cardDeck')
 const register = require('./register');
 const login = require('./login');
 const logout = require('./logout');
@@ -25,6 +26,17 @@ const app = express();
 app.get('/', (req,res) => 
 {
     home.homeGet(req, res); 
+});
+
+/**
+ * get route for '/cards'
+ *
+ * @param {JSON} req.session - Handeled automatically by express-sessions
+ * @returns {JSON} A JSON object that is fed to cardDeck
+ */
+app.get('/cards', (req,res) => 
+{
+    cards.cardGet(req, res); 
 });
 
 /**
