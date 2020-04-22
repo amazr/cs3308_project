@@ -18,6 +18,7 @@ Date         | What's new
 4/21 | Added some frontend animations. Also adjusted the user registration page. Changed how the search bars on the frontpage are laid out.
 4/22 | Added a toast for invalid locations. Also adjusted how user responses are generated, createNewResponse is now able to check whether a user is logged in and autofill other such information. Changed the routing for the register page a little bit.
 4/22 cont. | Created a modal to display directions from user origin to the destination (the title of the card). This modal opens upon a user clicking on the card. This costs 0.014 dollars everytime a direction has been loaded, so use sparingly... If no origin has been selected by the user then the map will open as just a single place. Loading just a single place on the map is free.
+4/22 cont2. | Fixed some sizing issues with the map modal. Also added weather image icons for every kind of weather condition (including night images). These images come directly from openweather, and thus match all of their weather codes.
 
 ## Getting up and running:
 1. Clone this repo

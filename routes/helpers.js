@@ -23,27 +23,66 @@ function KtoC(tempK) {
     return K-273.15;
 }
 
-//The goal of this function is to serve an image url for the weather cards
+//Takes a condition code and returns an internal url for the correct weather icon
 function getWeatherImage(condition) {
-    if (condition === "Clouds" || condition === "Mist" || condition === "Haze") 
+    /*
+        01d = img/ow_icons/clearsky.png
+        02d = img/ow_icons/fewclouds.png
+        03d = img/ow_icons/clouds.png
+        04d = img/ow_icons/brokenclouds.png
+        09d = img/ow_icons/rainshowers.png
+        10d = img/ow_icons/rain.png
+        11d = img/ow_icons/thunderstorms.png
+        13d = img/ow_icons/snow.png
+        50d = img/ow_icons/mist.png
+    */
+    if (condition === "01d") 
     {
-        return "img/cloudy.png";
+        return "img/ow_icons/clearsky.png";
     }
-    else if (condition === "Snow") 
+    else if (condition === "02d") 
     {
-        return "img/snow.png";
+        return "img/ow_icons/fewclouds.png";
     }
-    else if (condition === "Clear") 
+    else if (condition === "03d" || condition === "03n") 
     {
-        return "img/sunny.png";
+        return "img/ow_icons/clouds.png";
     }
-    else if (condition === "Rain") 
+    else if (condition === "04d" || condition === "04n") 
     {
-        return "img/rainy.png";
+        return "img/ow_icons/brokenclouds.png";
     }
-    else if (condition === "Thunderstorm")
+    else if (condition === "09d" || condition === "09n")
     {
-        return "img/thunderstorm.png";
+        return "img/ow_icons/rainshowers.png";
+    }
+    else if (condition === "10d")
+    {
+        return "img/ow_icons/rain.png";
+    }
+    else if (condition === "11d")
+    {
+        return "img/ow_icons/thunderstorms.png";
+    }
+    else if (condition === "13d" || condition === "13n")
+    {
+        return "img/ow_icons/snow.png";
+    }
+    else if (condition === "50d" || condition === "50n")
+    {
+        return "img/ow_icons/mist.png";
+    }
+    else if (condition === "01n")
+    {
+        return "img/ow_icons/clearsky_night.png";
+    }
+    else if (condition === "02n")
+    {
+        return "img/ow_icons/fewclouds_night.png";
+    }
+    else if (condition === "10n")
+    {
+        return "img/ow_icons/rain_night.png";
     }
     else 
     {

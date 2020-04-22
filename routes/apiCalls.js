@@ -16,7 +16,7 @@ function getAllCardData(location, req)
             { 
                 //The variables below are set to the required data we got from calling openweather
                 let weatherJSON = JSON.parse(body);
-
+                
                 let origin = false
                 if (req.session.origin)
                 {
@@ -24,7 +24,7 @@ function getAllCardData(location, req)
                 }
 
                 let destination = weatherJSON.name;
-                let imageSource = helpers.getWeatherImage(weatherJSON.weather[0].main);
+                let imageSource = helpers.getWeatherImage(weatherJSON.weather[0].icon);
                 
                 //Create the url for calling googles direction API
                 let noOrigin = true;
