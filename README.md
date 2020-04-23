@@ -24,10 +24,19 @@ Below you will find a large list of "brief" explanations of every directory / fi
   - **img** A directory for all images.
   - **js** A directory for all client-side js files.
 - **routes:** This directory contains all the backend routes and their behaviors.
-  - *apiCalls* Contains two functions: 
-    - **_getAllCardData(location, req)_:** returns a promise containing a JSON object of all relevant data from an given location. 
-    - **_callGoogleDirections(origin, destination)_:** returns a promise containing a JSON object that has an origin and a destination and the time it takes to drive from one to the other.
-  - *cardDeck*
+  - *apiCalls* Contains two functions. One function is called when a new card is being created, and the other is called when a user has entered a new origin location. 
+  - *cardDeck* Behavior for cardDeck, honestly don't remember what this one does, but it doesn't look important or even hooked up to anything.
+  - *getList* Behavior for the '/getList' get route. This handles get requests for anything in the form of '/list/:name' where :name could be anything (hopefully the name of that users list).
+  - *getPlace* Behavior for the '/getPlace' get route. Called when a user wants to add a new card. This needs to be async.
+  - *helpers* Contains some helper functions that can generate a standardized response to the frontend, return a valid img path, and change temperature units.
+  - *home* Behavior for the '/' get route. Mostly every route just redirects here, which helps keep the response to the frontend standardized.
+  - *login* Behavior for the '/login' post route.  
+  - *logout* Behavior for the '/logout' get route. Logs a user out if they're logged in.
+  - *register* Behvior for the '/register' get and post routes. The get route tells *index* to load the register partial. The post route adds a new user to the database.
+  - *routes* This links every route to its proper behavior.
+  - *saveList* Behavior for the '/saveList' get route. This saves the users current list to the database.
+  - *setLocation* Behavior for the '/setLocation' post route. If a user tries to a set a location this route tries to update the travel time for every loaded card.
+  - *test* This contains the behavior for some homemade tests.
 - **views:** This directory contains all of our front-end views (HTML files generally, in this case we are using EJS).
   - **pages** A directory for full pages.
     - *index.ejs* This file is actually our only full page. Different partials will get rendered in this file depending on the response passed to it from the backend.
@@ -45,20 +54,14 @@ Below you will find a large list of "brief" explanations of every directory / fi
     - *registerForm* Partial for the user registration "page". This is technically not it's own page because it is just conditionally rendered into *index.ejs*. 
     - *toast* Partial for the toast that is displayed when a user enters a location that openweather cannot find (an invalid place).
     - *weatherCard* Partial for the weather cards.
-- **.env**
-  - This is a secret file containing our API keys! Each key is stored in a variable name. These can be referenced in our backend, example: *process.env.MONGOURL*.
 - **.gitignore**
   - Tells git to ignore certain files. You can override this, but please don't ever do that.
-- **app.yaml**
-  - Currently not in use, but we can use this to host our project on Google Cloud.
-- **package-lock.json**
-  - Honestly, just ignore this. It is dynamically generated from npm.
-- **package.json**
-  - This file tells node what dependencies we have loaded. When you run 'npm install' it looks for this file and installs listed dependencies. We also define other app behavior there, like what file to run when we type 'npm start' and if we want to run any other scripts, such as nodemon, when we start up.
 - **README.md**
-  - This is the file you're currently reading!
+  - This is the file you're currently reading. Contains a project description, changelog, and file structure overview.
+- **package.json**
+  - This file tells node what dependencies we have loaded. When you run 'npm install' it looks for this file and installs listed dependencies. We can define a whole bunch of other stuff here, but all we do is list dependencies and set a custom 'start' script.
 - **server.js**
-  - This file contains our sever setup. It sets our view engine (ejs), connects to our database, loads our static resources, sets up sessioning, links some dependencies. This file will rarely need to be changed or looked at.
+  - This file contains our sever setup. It sets our view engine (ejs), connects to our database, loads our static resources, sets up sessioning, links some dependencies. This file will rarely need to be changed or looked at. An important thing to note, the project has two different modes ('dev' and 'prod') that can change some behavior in this file. The most important difference between modes is how sessions work. In 'dev' mode sessions are stored locally on disk but in 'prod' mode they are store in a memory cache server. 
 
 ## Change-Log
 Date         | What's new
