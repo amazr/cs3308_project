@@ -35,6 +35,6 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.set('view engine', 'ejs');
 
 /* App is running on port 3000 */
-app.listen(8080, () => {
+app.listen(process.env.PORT | 8080, () => {
     console.log("Server running on localhost:8080");
 });
