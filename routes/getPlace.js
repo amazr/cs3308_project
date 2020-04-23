@@ -5,8 +5,6 @@ const apiCaller = require('./apiCalls');
 
 async function getPlaceGet(req, res)
 {
-    //Generate new response and create a openweather api url
-    let response = helpers.createNewResponse(req.session);
     try
     {
         let newCard = await apiCaller.getAllCardData(req.body.newPlace, req);
