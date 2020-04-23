@@ -15,8 +15,9 @@ Below you will find a large list of "brief" explanations of every directory / fi
 *Files* are italicized
 
 **Directories** are in bold
----
-  
+
+_____________________________
+
 - **models:** A directory for Mongo/Mongoose models/schemas.
   - *user.js* Contains the user Schema that defines the structure of a single user in our database.
 - **resources:** A Static resources directory. Contains client-side JS files, images, and CSS.
