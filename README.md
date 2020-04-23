@@ -16,7 +16,6 @@ Below you will find a large list of "brief" explanations of every directory / fi
 
 **Directories** are in bold
 
-_____________________________
 
 - **models:** A directory for Mongo/Mongoose models/schemas.
   - *user.js* Contains the user Schema that defines the structure of a single user in our database.
