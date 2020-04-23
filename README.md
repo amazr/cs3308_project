@@ -11,9 +11,13 @@ Jupiter Weather is an express / node website that is hosted on Heroku. The websi
 
 ## Guide to the Repo:
 Below you will find a large list of "brief" explanations of every directory / file in this repository.
+
+*Files* are italicized
+
+**Directories** are in bold
   
-- **models**
-  - This directory holds the file *user.js*. This is what is called a schema, it is essentially a pre-made db structure. We can reference this file when making calls to the db so we can make sure we send data in the correct structure, and know what structure to expect when we request data. 
+- **models:** A directory for Mongo/Mongoose models/schemas
+  - *user.js*
 - **node_modules**
   - This is where all of our dependencies are installed. You should never have to open this.
 - **resources**
