@@ -6,17 +6,17 @@ const helpers = require('./helpers');
 // sync, but we can treat it as a blocking function in an async function but calling it with the 'await' keyword. Which we do above.
 function getAllCardData(location, req)
 {
-    return new Promise((resolve, reject) => 
+    return new Promise((resolve, reject) =>
     {
         let urlWeather = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.OPENWEATHER}`
 
-        request(urlWeather, (error, resp, body) => 
+        request(urlWeather, (error, resp, body) =>
         {
-            if (!error && resp.statusCode == 200) 
-            { 
+            if (!error && resp.statusCode == 200)
+            {
                 //The variables below are set to the required data we got from calling openweather
                 let weatherJSON = JSON.parse(body);
-                
+
                 let origin = false
                 if (req.session.origin)
                 {
@@ -24,8 +24,8 @@ function getAllCardData(location, req)
                 }
 
                 let destination = weatherJSON.name;
-                let imageSource = helpers.getWeatherImage(weatherJSON.weather[0].icon);
-                
+                let imageSource = helpers.getWeatherImage(weatherJSON.weather[0].icon, weatherJSON.weather[0].id);
+
                 //Create the url for calling googles direction API
                 let noOrigin = true;
                 if (!origin)
@@ -35,18 +35,18 @@ function getAllCardData(location, req)
                 }
 
                 let urlGoogle = `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${destination}&key=${process.env.GOOGLE}`;
-                
-                request(urlGoogle, (error, respond, body) => 
+
+                request(urlGoogle, (error, respond, body) =>
                 {
                     //If the call to Google directions was successfull
-                    if (!error && respond.statusCode == 200) 
+                    if (!error && respond.statusCode == 200)
                     {
                         //The variables below are set to the required data we got from calling Google Directions
                         let googleJSON = JSON.parse(body);
                         let name = googleJSON.destination_addresses[0];
                         origin = googleJSON.origin_addresses[0];
                         let timeTo = "";
-                        try 
+                        try
                         {
                             timeTo = `From ${origin}: ${googleJSON.rows[0].elements[0].duration.text}`;
                         }
@@ -61,7 +61,7 @@ function getAllCardData(location, req)
                             origin = null;
                             timeTo = "No time found";
                         }
-                                    
+
                         //This can be thought of as returning the following object
                         resolve({
                             title: name,
@@ -71,8 +71,8 @@ function getAllCardData(location, req)
                             conditions: weatherJSON.weather[0].main,
                             imageSource: imageSource,
                             timeTo: timeTo,
-                            origin: origin 
-                        });          
+                            origin: origin
+                        });
                     }
                     else
                     {
@@ -96,11 +96,11 @@ function callGoogleDirections(origin, destination, session)
     return new Promise((resolve, reject) =>
     {
         let urlGoogle = `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${destination}&key=${process.env.GOOGLE}`;
-                    
-        request(urlGoogle, (error, response, body) => 
+
+        request(urlGoogle, (error, response, body) =>
         {
             //If the call to Google directions was successfull
-            if (!error && response.statusCode == 200) 
+            if (!error && response.statusCode == 200)
             {
                 //The variables below are set to the required data we got from calling Google Directions
                 let googleJSON = JSON.parse(body);
@@ -115,7 +115,7 @@ function callGoogleDirections(origin, destination, session)
                 }
 
                 let timeTo = "";
-                try 
+                try
                 {
                     timeTo = `From ${googleJSON.origin_addresses[0]}: ${googleJSON.rows[0].elements[0].duration.text}`;
                 }
@@ -123,13 +123,13 @@ function callGoogleDirections(origin, destination, session)
                 {
                     timeTo = "No time found";
                 }
-                                        
+
                 //This can be thought of as returning the following object
                 resolve({
                     origin: originName,
                     destinationName: destinationName,
                     time: timeTo
-                });          
+                });
             }
             else
             {

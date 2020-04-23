@@ -2,7 +2,7 @@
 //This should always be called to generate a response template if you are passing data to the frontend
 function createNewResponse(session) {
     return {
-        isLoggedIn: !!session.user,     
+        isLoggedIn: !!session.user,
         username: (session.user) ? session.user.name : "",
         page: "",
         messages: (session.messages) ? session.messages: [],
@@ -23,68 +23,72 @@ function KtoC(tempK) {
     return K-273.15;
 }
 
-//Takes a condition code and returns an internal url for the correct weather icon
-function getWeatherImage(condition) {
-    /*
-        01d = img/ow_icons/clearsky.png
-        02d = img/ow_icons/fewclouds.png
-        03d = img/ow_icons/clouds.png
-        04d = img/ow_icons/brokenclouds.png
-        09d = img/ow_icons/rainshowers.png
-        10d = img/ow_icons/rain.png
-        11d = img/ow_icons/thunderstorms.png
-        13d = img/ow_icons/snow.png
-        50d = img/ow_icons/mist.png
-    */
-    if (condition === "01d") 
+//Takes a condition code and returns an internal url for the correct weather condition
+function getWeatherImage(condition, id) {
+
+    if (condition === "01d")
     {
-        return "img/ow_icons/clearsky.png";
+        return "img/icons/sunny.png";
     }
-    else if (condition === "02d") 
+    else if (condition === "02d")
     {
-        return "img/ow_icons/fewclouds.png";
+        return "img/icons/partly_cloudy.png";
     }
-    else if (condition === "03d" || condition === "03n") 
+    else if (condition === "03d" || condition === "03n")
     {
-        return "img/ow_icons/clouds.png";
+        return "img/icons/cloudy.png";
     }
-    else if (condition === "04d" || condition === "04n") 
+    else if (condition === "04d" || condition === "04n")
     {
-        return "img/ow_icons/brokenclouds.png";
+        return "img/icons/heavy_clouds.png";
     }
-    else if (condition === "09d" || condition === "09n")
+    else if ( condition === "09d" || condition === "09n")
     {
-        return "img/ow_icons/rainshowers.png";
+        return "img/icons/rain2.png";
     }
     else if (condition === "10d")
     {
-        return "img/ow_icons/rain.png";
+        return "img/icons/rain.png";
     }
     else if (condition === "11d")
     {
-        return "img/ow_icons/thunderstorms.png";
+      if (id >= 210 && id < 230)
+      {
+        return "img/icons/lightning.png";
+      }
+      else
+      {
+        return "img/icons/storm.png";
+      }
     }
     else if (condition === "13d" || condition === "13n")
     {
-        return "img/ow_icons/snow.png";
+        return "img/icons/snow.png";
     }
     else if (condition === "50d" || condition === "50n")
     {
-        return "img/ow_icons/mist.png";
+      if (id == 781)
+      {
+        return "img/icons/tornado.png";
+      }
+      else
+      {
+        return "img/icons/fog.png";
+      }
     }
     else if (condition === "01n")
     {
-        return "img/ow_icons/clearsky_night.png";
+        return "img/icons/night.png";
     }
     else if (condition === "02n")
     {
-        return "img/ow_icons/fewclouds_night.png";
+        return "img/icons/partly_cloudy_n.png";
     }
     else if (condition === "10n")
     {
-        return "img/ow_icons/rain_night.png";
+        return "img/icons/rain_night.png";
     }
-    else 
+    else
     {
         return "error.png";
     }
@@ -117,11 +121,11 @@ function isValidLocation(location)
 }
 
 module.exports = {
-    createNewResponse: function(req) 
+    createNewResponse: function(req)
     {
         return createNewResponse(req);
     },
-    KtoF: function(tempK) 
+    KtoF: function(tempK)
     {
         return KtoF(tempK);
     },
@@ -129,8 +133,8 @@ module.exports = {
     {
         return KtoC(tempK);
     },
-    getWeatherImage: function(condition)
+    getWeatherImage: function(condition, id)
     {
-        return getWeatherImage(condition);
+        return getWeatherImage(condition, id);
     }
 }
