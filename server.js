@@ -5,6 +5,7 @@ require('dotenv').config();
 const routes = require('./routes/routes');
 const tests = require('./routes/tests');
 const session = require('express-session');
+var MemcachedStore = require('connect-memjs')(session);
 const bodyParser= require('body-parser');
 
 /* Declare express app */
@@ -14,8 +15,12 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({
     'secret': process.env.SECRET,
-    saveUninitialized: false,
-    resave: true
+    resave: 'false',
+    saveUninitialized: 'false',
+    store: new MemcachedStore({
+    servers: [process.env.MEMCACHIER_SERVERS],
+    prefix: '_session_'
+  })
 }));
 app.use(express.static('resources'))
 app.use(routes);
