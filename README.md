@@ -15,26 +15,36 @@ Below you will find a large list of "brief" explanations of every directory / fi
 *Files* are italicized
 
 **Directories** are in bold
+===
   
-- **models:** A directory for Mongo/Mongoose models/schemas
-  - *user.js*
-- **node_modules**
-  - This is where all of our dependencies are installed. You should never have to open this.
-- **resources**
-  - This is where our static resources live. Static resources include client-side js, images, and css. If we reference things that live here we never need to include resources. For example, to link *login.js* we call *js/login.js*, NOT *resources/js/login.js*.
-- **views**
-  - **pages**
-    - This includes our *index.ejs* file. This ejs file changes based on data from the backend. What is displayed to the user is actually a mix of partials loaded into this file. Check the ejs *include* commands.
-  - **partials**
-    - *add-card* Contains the search bar and add button form. Triggers POST-getPlace.
-    - *bootstrap* Contains the links for bootstrap
-    - *cardDeck* HTML for the card deck AND cards, subject to HEAVY change
-    - *login-modal* HTML for the login modal
-    - *nav* HTML for the nav bar
-    - *registerForm* Page for when a user wants to register, this also links to *register.js*.
-    - *temp* This is never loaded as of now, contains buttons for testing API calls
-- **routes**
-  - *routes.js* This file contains all of our routes. Each route calls a function that defines the routes behavior. These functions exist in other files (in the routes directory). Each file has the same name as the route, e.g the behavior for the '/login' get route can be found in the login.js file.  
+- **models:** A directory for Mongo/Mongoose models/schemas.
+  - *user.js* Contains the user Schema that defines the structure of a single user in our database.
+- **resources:** A Static resources directory. Contains client-side JS files, images, and CSS.
+  - **css** A directory for all CSS files.
+  - **img** A directory for all images.
+  - **js** A directory for all client-side js files.
+- **routes:** This directory contains all the backend routes and their behaviors.
+  - *apiCalls* Contains two functions: 
+    - **_getAllCardData(location, req)_:** returns a promise containing a JSON object of all relevant data from an given location. 
+    - **_callGoogleDirections(origin, destination)_:** returns a promise containing a JSON object that has an origin and a destination and the time it takes to drive from one to the other.
+  - *cardDeck*
+- **views:** This directory contains all of our front-end views (HTML files generally, in this case we are using EJS).
+  - **pages** A directory for full pages.
+    - *index.ejs* This file is actually our only full page. Different partials will get rendered in this file depending on the response passed to it from the backend.
+  - **partials** A directory for pieces of a full page.
+    - *add-card* Partial for the search bar where a user searches for a new weather card.
+    - *bootstrap* Contains links for bootstrap.
+    - *cardDeck* Partial for the large grey area that contains weather cards. It also contains the weather card list and other such things.
+    - *createList* Partial for the buttons in the cardDeck that deal with saving/loading user lists.
+    - *javascript* Partial that contains some varied js scipts. These really should be in resources/js. Deals with some onclick functions, one example is displaying the map when a card is clicked on.
+    - *login-modal* Partial for the login modal.
+    - *map-modal* Partial for the map modal that appears when a card is clicked.
+    - *map* Contains the iframe that actually displayed the embedded map.
+    - *my-location* Partial for the area where a user can set a location for calculating travel times on the cards.
+    - *nav* Partial for the nav bar.
+    - *registerForm* Partial for the user registration "page". This is technically not it's own page because it is just conditionally rendered into *index.ejs*. 
+    - *toast* Partial for the toast that is displayed when a user enters a location that openweather cannot find (an invalid place).
+    - *weatherCard* Partial for the weather cards.
 - **.env**
   - This is a secret file containing our API keys! Each key is stored in a variable name. These can be referenced in our backend, example: *process.env.MONGOURL*.
 - **.gitignore**

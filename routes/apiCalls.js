@@ -91,7 +91,7 @@ function getAllCardData(location, req)
 //A function to call the Google directions API
 //ON SUCCESS: returns resolve
 //ON FAILURE: returns reject
-function callGoogleDirections(origin, destination, session)
+function callGoogleDirections(origin, destination)
 {
     return new Promise((resolve, reject) =>
     {
