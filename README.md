@@ -3,20 +3,14 @@ A live version can be found [here](https://jupiter-weather-app.herokuapp.com/).
 
 Jupiter Weather is an express / node website that is hosted on Heroku. The website allows users to quickly and easily compare the weather at multiple locations at the same time. Each card contains the current conditions (rain, sun, snow, etc.), and icon for every condition, current temperature, max / min temperature, and a field for displaying travel times. Each location is stored in a list of cards that a user can save to a MongoDB database and reload at a later date. Users can also set their location and view travel times on each card. Clicking on cards when the user has set their location will open up an embedded directions map.
 
-## Getting up and running:
+## Getting up and running *locally*:
 1. Clone this repo
 2. Get the '.env' file from [alma9011@colorado.edu](mailto:alma9011@colorado.edu). This includes all our API keys. Nothing works without it.
 3. In your terminal type 'npm install'
 4. To run the server type 'npm start'
 
 ## Guide to the Repo:
-* The express server can found in server.js, it has a lot of comments explaining what everything does.
-* EJS is just a templating engine, I think it might be a pretty simple thing to use, so look it up, but this can be easily swapped for something else right now!
-* nodemon is running, so if the server is running and you make any changes to server.js it will automatically restart.
-* Stop the server with 'ctrl + C' if in linux
-* Text me if you have questions.
-* Please run 'npm install' everytime you pull just incase extra dependencies were installed since the last time you pulled.
-* 'killall node' might help if you cannot connect to localhost but the server is running
+Below you will find a large list of "brief" explanations of every directory / file in this repository.
   
 - **models**
   - This directory holds the file *user.js*. This is what is called a schema, it is essentially a pre-made db structure. We can reference this file when making calls to the db so we can make sure we send data in the correct structure, and know what structure to expect when we request data. 
