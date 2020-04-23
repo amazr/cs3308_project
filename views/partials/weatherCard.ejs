@@ -10,11 +10,15 @@
 
 <% } %>
 
-<% for (let i = 0; i < cards.length; i++) { %>
+<% for (let i = (cards.length - 1); i >= 0; i--) { %>
     <div class="col-md-4 animated bounceIn col-lg-3 col-sm-6 col-xs-12 mt-3 mb-2 weather-card"  onclick="setMap('<%= cards[i].title %>', '<%= cards[i].origin %>');">
         <div class="card card-jupiter card-block ml-0 mr-0">
             <div class="card-header card-jupiter-inner" align="center">
-                <h6><i class="fas fa-map-marker-alt float-left"></i> <%= cards[i].title %></h6>
+                <span tabindex="0" data-toggle="tooltip" title="<%=cards[i].title%>">
+                    <% var title = cards[i].title; %>
+                    <% if (cards[i].title.length > 20) { title = title.slice(0,17); title += "..."  } %>
+                    <h6><i class="fas fa-map-marker-alt float-left"></i> <%= title %></h6>
+                </span>
             </div>
             <div class="card-body inner-lightest-color" align="center">
                 <img src="<%=cards[i].imageSource%>" alt="<%= cards[i].conditions %>.png" class="weather-image">
@@ -44,7 +48,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <p style="font-size: 10px;"><%= cards[i].timeTo %></p>
+                <p style="font-size: 10px; height: 30px;"><%= cards[i].timeTo %></p>
             </div>
         </div>
     </div>

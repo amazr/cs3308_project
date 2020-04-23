@@ -14,6 +14,7 @@ async function getPlaceGet(req, res)
     }
     catch (error)
     {
+        req.session.messages = [];
         req.session.messages.push("invplace");
     }
 
