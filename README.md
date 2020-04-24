@@ -1,5 +1,5 @@
 # Project Jupiter
-A live version can be found [here](https://jupiter-weather-app.herokuapp.com/).
+A live version hosted on Heroku can be found [here](https://jupiter-weather-app.herokuapp.com/).
 
 Jupiter Weather is an express / node website that is hosted on Heroku. The website allows users to quickly and easily compare the weather at multiple locations at the same time. Each card contains the current conditions (rain, sun, snow, etc.), and icon for every condition, current temperature, max / min temperature, and a field for displaying travel times. Each location is stored in a list of cards that a user can save to a MongoDB database and reload at a later date. Users can also set their location and view travel times on each card. Clicking on cards when the user has set their location will open up an embedded directions map.
 
