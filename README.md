@@ -5,7 +5,7 @@ Jupiter Weather is an express / node website that is hosted on Heroku. The websi
 
 ## Getting up and running *locally*:
 1. Clone this repo
-2. Get the '.env' file from [alma9011@colorado.edu](mailto:alma9011@colorado.edu). This includes all our API keys. Nothing works without it.
+2. Get the '.env' file from [alma9011@colorado.edu](mailto:alma9011@colorado.edu). This includes all our API keys, what mode to run the project in, and specifies the port (because Heroku auto-generates a port as an env variable, we will manually set one as an env variable as well). Nothing works without it.
 3. In your terminal type 'npm install'
 4. To run the server type 'npm start'
 
