@@ -1,7 +1,7 @@
 # Project Jupiter
 A live version can be found [here](https://jupiter-weather-app.herokuapp.com/).
 
-Jupiter Weather is an express / node website that is hosted on Heroku. The website allows users to quickly and easily compare the weather at multiple locations at the same time. Each card contains the current conditions (rain, sun, snow, etc.), and icon for every condition, current temperature, max / min temperature, and a field for displaying travel times. Each location is stored in a list of cards that a user can save to a MongoDB database and reload at a later date. Users can also set their location and view travel times on each card. Clicking on cards when the user has set their location will open up an embedded directions map.
+Jupiter Weather is an react-y express / node website that is hosted on Heroku. The website allows users to quickly and easily compare the weather at multiple locations at the same time. Each card contains the current conditions (rain, sun, snow, etc.), and icon for every condition, current temperature, max / min temperature, and a field for displaying travel times. Each location is stored in a list of cards that a user can save to a MongoDB database and reload at a later date. Users can also set their location and view travel times on each card. Clicking on cards when the user has set their location will open up an embedded directions map.
 
 ## Getting up and running *locally*:
 1. Clone this repo
@@ -45,7 +45,7 @@ Below you will find a large list of "brief" explanations of every directory / fi
     - *bootstrap* Contains links for bootstrap.
     - *cardDeck* Partial for the large grey area that contains weather cards. It also contains the weather card list and other such things.
     - *createList* Partial for the buttons in the cardDeck that deal with saving/loading user lists.
-    - *javascript* Partial that contains some varied js scipts. These really should be in resources/js. Deals with some onclick functions, one example is displaying the map when a card is clicked on.
+    - *javascript* Partial that contains some varied js scipts. These really should be in resources/js. Deals with some onclick functions, one example is displaying the map when a card is clicked on. Code for the google maps modal and the reactive-y stuff lives here.
     - *login-modal* Partial for the login modal.
     - *map-modal* Partial for the map modal that appears when a card is clicked.
     - *map* Contains the iframe that actually displayed the embedded map.
