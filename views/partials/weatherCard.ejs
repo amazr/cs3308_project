@@ -1,27 +1,70 @@
-<% for (let i = 0; i < cards.length; i++) { %>
-    <div class="col-2">
-        <br>
-        <div class="card card-block card-border-custom" >
-            <div class="card-header" align="center" style="background-color:#bdeaee;border-bottom:5px dashed #76b4bd">
-                <h4 ><%= cards[i].title %></h4>
+<% if (cards.length == 0) { %>
+
+<div class="blank-spacer text-center col-12">
+    <div class="display-1 title">
+        <i class="fas fa-meteor"></i>
+        <div class="title h5 col-12 text-center">Nothing to see here...</div>
+    </div>
+</div>
+
+
+<% } %>
+
+<% for (let i = (cards.length - 1); i >= 0; i--) { %>
+    <div class="col-md-4 animated bounceIn col-lg-3 col-sm-6 col-xs-12 mt-3 mb-2 " >
+        <div class="card card-jupiter card-block ml-0 mr-0">
+            <div class="card-header card-jupiter-inner" align="center">
+                <span tabindex="0" data-toggle="tooltip" title="<%=cards[i].title%>">
+                    <% var title = cards[i].title; %>
+                    <% if (cards[i].title.length > 20) { title = title.slice(0,17); title += "..."  } %>
+                    <h6>
+                        <i  class="fas fa-map-marker-alt float-left weather-card"  
+                            onclick="setMap('<%= cards[i].title %>', '<%= cards[i].origin %>');">
+                        </i> 
+                        <%= title %>
+                        <i  class="fas fa-times float-right weather-card"  
+                            onclick="deleteCard('<%= cards[i].title %>')">
+                        </i> 
+                    </h6>
+                </span>
             </div>
-            <div class="card-body" style="background-color: #ebf4f6;">
-                <div style="text-align: center;margin-bottom:20px">
-                    <img src="<%=cards[i].imageSource%>" alt="<%= cards[i].conditions %>.png" class="weather-image">
-                </div>
-                <p class="row">
-                    <img src="./img/temp.png" class="col-4"/> 
-                    <span class="col-8"><%= cards[i].currentTemp %> F</span>
-                </p>
-                <p class="row">
-                    <img src="./img/condition.png" class="col-4"/> 
-                    <span class="col-8"><%= cards[i].conditions %></span>
-                </p>
-                <p class="row">
-                    <img src="./img/time.png" style="width:25px;height:25px" class="col-4"/> 
-                    <span class="col-8"><%= cards[i].timeTo %></span>
-                </p>
+            <div class="card-body" align="center">
+                <img src="<%=cards[i].imageSource%>" alt="<%= cards[i].conditions %>.png" class="weather-image">
+                <% if (cards[i].currentTemp <= 40) { var thermColor = "bg-info" } %>
+                <% if (cards[i].currentTemp > 40 && cards[i].currentTemp < 80) { var thermColor = "bg-success" } %>
+                <% if (cards[i].currentTemp >= 80 && cards[i].currentTemp < 100) { var thermColor = "bg-warning" } %>
+                <% if (cards[i].currentTemp >= 100) { var thermColor = "bg-danger" } %>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <i class="fas fa-cloud"></i>
+                                Condition
+                            </th>
+                            <th scope="col"><%=cards[i].conditions%></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"><i class="fas fa-thermometer-empty mr-2"></i>Current</th>
+                            <td class="<%= thermColor %>"><%=cards[i].currentTemp%> <%= tempType %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><i class="fas fa-thermometer-quarter mr-2"></i>Min</th>
+                            <td><%=cards[i].minTemp%> <%= tempType %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><i class="fas fa-thermometer-full mr-2"></i>Max</th>
+                            <td><%=cards[i].maxTemp%> <%= tempType %></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size: 10px; height: 30px;"><%= cards[i].timeTo %></p>
             </div>
         </div>
     </div>
+<% } %>
+
+<% if (messages.includes("invplace")) { %>
+<div class="invalid-place"></div>
 <% } %>

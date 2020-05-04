@@ -8,16 +8,24 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 <script>
+    function  deleteCard(cardTitle){
+        var payload = {cardTitle: cardTitle};
+        //Make the post request
+        var returnData =$.post("/deleteCard",payload).done(function(data){
+                window.location.reload()
+        });
+    }
     function  setMap (location, origin) {
         let mode = "place";
-        if (origin)
+
+        if (!origin || origin == location)
+        {
+            $(".map-top").attr('src',`https://www.google.com/maps/embed/v1/${mode}?key=<%= (embedKey) ? embedKey : '' %>&q="${location}`)
+        }
+        else if (origin)
         {
             mode = "directions";
             $(".map-top").attr('src',`https://www.google.com/maps/embed/v1/${mode}?key=<%= (embedKey) ? embedKey : '' %>&origin=${origin}&destination=${location}`)
-        }
-        else
-        {
-            $(".map-top").attr('src',`https://www.google.com/maps/embed/v1/${mode}?key=<%= (embedKey) ? embedKey : '' %>&q="${location}`)
         }
 
         $('#map-modal').modal('show');

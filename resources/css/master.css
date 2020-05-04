@@ -1,51 +1,98 @@
+body {
+    background-color: #E8E8E8;
+}
 .weather-image {
     width: 60%;
     height: auto;
-    text-align: center;
 }
-.color-bg{
-    background-color: #58668b;
+.weather-card {
+    cursor: pointer;
 }
-.color-white{
-    color:white;
+.background {
+    background-color: #E8E8E8;
 }
-.nav-height{
-    height:70px;
+.primary-color {
+    color: #FC814A;
 }
-body,html{
+.secondary-color {
+    color: #564256;
+}
+.dark-background {
+    background-color: #564256;
+    border: none;
+}
+
+.title {
+    color: #ffffff;
+}
+.inner-color {
+    background-color: #96939B;
+    border: none;
+}
+
+.inner-lightest-color {
+    background-color: #E8E8E8;
+    border: none;
+}
+
+.disabled {
+    background-color: #A9A9A9;
+    border: none;
+}
+
+.inner-light-color {
+    background-color: #BFBFBF;
+    border: none;
+}
+
+.nav-bar-background {
+    background-color: #FC814A;
+}
+
+.btn-jupiter {
+    background-color: #FC814A;
+    margin-bottom: 5px;
+}
+
+.card-jupiter {
+    border: none;
+}
+
+.card-jupiter-inner {
+    background-color: #FC814A;
+    border: none;
+}
+
+.blank-spacer {
+    margin-top: 100px;
+    line-height: 300px;
+    min-height: 300px;
+    height: 300px;
+ }
+
+ .small-spacer {
+    margin-top: 50px;
+    line-height: 50px;
+    min-height: 50px;
+    height: 50px;
+ }
+ .white{
+     color:#fff;
+ }
+ 
+ .toggle-temp-wrapper{
+    width:36px;
+    height:36px;
+    background-color: #A9A9A9;
+    border-radius: 3px;
+}
+.toggle-temp-a{
+    display: inline-block;
+    width:100%;
     height:100%;
-}
-.bodyBg {
-    background-image: url('../img/bg1.jpg');
-    background-position: center center;
-    background-size: cover;
-}
-.card-border-custom{
-
-    border: 2px solid #58668b;
-    border-radius: 8px;
-}
-.btn-custom{
-    display:inline-block;
-    padding:0.3em 1.2em;
-    margin:0 0.3em 0.3em 0;
-    border-radius:2em;
-    box-sizing: border-box;
-    font-family:'Roboto',sans-serif;
-    font-weight:100px;
-    color:#FFFFFF;
-    background-color:#76b4bd;
-    text-align:center;
-    transition: all 0.2s;
-
-}
-.btn-custom:hover{
-    background-color:#4095c6;
-}
-
-.add-card-custom{
-    color:white;
-    font:oblique;
-    font-size: 23px;
-    
+    line-height: 36px;
+    text-align: center;
+    cursor:pointer;
+    text-decoration: none;
+    color:#212529;
 }

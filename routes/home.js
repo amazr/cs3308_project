@@ -2,20 +2,18 @@ const helpers = require('./helpers');
 
 function homeGet(req, res)
 {
+    //These are session field initializers.
     if (!req.session.cards)
     {
         req.session.cards = [];
     }
-
-    let response = helpers.createNewResponse(req.session.cards);
-
-    //If the user is logged in set the response accordingly
-    if (req.session.user) 
+    if (!req.session.messages)
     {
-        response.isLoggedIn = req.session.user.isLoggedIn;
-        response.username = req.session.user.name;
-        response.lists = req.session.user.lists;
+        req.session.messages = [];
     }
+
+    let response = helpers.createNewResponse(req.session);
+    req.session.messages = [];
 
     //Note: if the user is not logged in, the response is the default response from calling helpers.createNewResponse()
     res.render('pages/index', response);

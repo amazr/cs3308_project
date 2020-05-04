@@ -4,16 +4,10 @@ const bcrypt = require("bcrypt");
 
 function registerGet(req, res) 
 {
-    let response = helpers.createNewResponse(req.session.cards);
+    let response = helpers.createNewResponse(req.session);
 
-    //If the user is logged in, set the response information
-    //Else set the response page to register
-    if (req.session.user) 
-    {
-        response.isLoggedIn = req.session.user.isLoggedIn;
-        response.username = req.session.user.name;
-    }
-    else 
+    //If the user is not logged in then load the register page
+    if (!response.isLoggedIn)
     {
         response.page = "register"
     }
@@ -25,7 +19,7 @@ function registerPost(req, res)
 {
     let user = new userModel(req.body);
 
-    let response = helpers.createNewResponse(req.session.cards);
+    let response = helpers.createNewResponse(req.session);
 
     //If the user did not enter a username in the form
     if (!req.body.username) 
